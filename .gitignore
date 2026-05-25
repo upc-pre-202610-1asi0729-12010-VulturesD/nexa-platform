@@ -1,0 +1,37 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+__MACOSX/
+
+# .NET build output
+bin/
+obj/
+TestResults/
+out/
+packages/
+
+# IDE and local workspace files
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+*.DotSettings.user
+/_ReSharper.Caches/
+
+# Logs and temporary files
+logs/
+*.log
+*.tmp
+*.cache
+
+# Local secrets and databases
+.env
+.env.local
+appsettings.Local.json
+*.db
+*.sqlite
+*.pfx
+*.p12
+secrets/
