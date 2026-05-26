@@ -1,114 +1,97 @@
 <div align="center">
 
-<br/>
-
 <img src="https://raw.githubusercontent.com/upc-pre-202610-1asi0729-12010-VulturesD/nexa-website/main/nexa.svg" alt="Nexa" width="200"/>
-
-<br/><br/>
 
 # nexa-platform
 
-**Backend API and platform services for the Nexa B2B distribution platform**
+**Java Spring Boot API for Nexa B2B cold-chain operations**
 
-<br/>
-
-![ASP.NET Core](https://img.shields.io/badge/ASP.NET%20Core-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
+![Java](https://img.shields.io/badge/Java-21-0a2540?style=for-the-badge)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3-6db33f?style=for-the-badge&logo=springboot&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
-
-<br/>
-
-![Course](https://img.shields.io/badge/Course-1ASI0729%20Desarrollo%20de%20Aplicaciones%20Open%20Source-0a2540?style=flat-square)
-![Cycle](https://img.shields.io/badge/Cycle-2026--10-0a2540?style=flat-square)
-![University](https://img.shields.io/badge/University-UPC-0a2540?style=flat-square)
-![Team](https://img.shields.io/badge/Team-Vultures%20Devs-2a67d9?style=flat-square)
-![Status](https://img.shields.io/badge/Status-In%20Development-f59e0b?style=flat-square)
-
-<br/>
 
 </div>
 
----
+## Purpose
 
-## What is this repository?
-
-This repository contains the backend API and platform services for the Nexa B2B cold-chain distribution platform. Built with ASP.NET Core Web API following a Domain-Driven Design (DDD) architecture, it exposes RESTful endpoints for authentication, product catalog management, inventory monitoring, B2B order processing, and cold-chain traceability.
-
----
+`nexa-platform` exposes RESTful services for a B2B cold-chain distribution workflow: catalog management, inventory control, sales orders, dispatch tracking, invoicing, and IAM.
 
 ## Architecture
 
-The platform is organized around the following bounded contexts:
+The platform follows bounded contexts with layered packages:
 
-| Bounded Context | Responsibility |
+| Context | Responsibility |
 |---|---|
-| Identity | Authentication, authorization, and user session management |
-| Catalog | Product definitions, categories, and pricing structures |
-| Inventory | Stock levels, warehouse locations, and cold-chain conditions |
-| Orders | B2B order lifecycle from quote to fulfillment |
-| Customer Management | Distributor and client account management |
-| Commercial Conditions | Contract terms, pricing agreements, and credit lines |
-| Traceability | Cold-chain audit trail and condition monitoring |
+| IAM | Authentication, authorization, and current user access |
+| Catalog Management | Products, categories, suppliers, and cold-chain requirements |
+| Warehouse | Warehouses, inventory, batches, movements, and alerts |
+| Sales | Customers, sales orders, order items, and status changes |
+| Logistics | Shipments, routes, driver checklists, and tracking |
+| Invoicing | Invoices, invoice lines, payments, and payment status |
+| Shared | Configuration, errors, OpenAPI, CORS, and seed data |
 
----
+Each context keeps `domain`, `application`, `infrastructure`, and `interfaces` layers.
 
-## Tech stack
+## Runtime profiles
 
-| Layer | Technology |
+| Profile | Database | Use case |
+|---|---|---|
+| `mysql` | MySQL | Development or deployment with environment variables |
+| `local` | H2 in memory | Local API verification without external services |
+| `test` | H2 in memory | Automated tests |
+
+Required variables for the `mysql` profile:
+
+```bash
+DB_HOST=localhost
+DB_PORT=3306
+DB_NAME=nexa_platform_db
+DB_USERNAME=nexa_user
+DB_PASSWORD=change-me
+JWT_SECRET=change-this-secret-with-at-least-32-characters
+JWT_EXPIRATION_MINUTES=120
+```
+
+## Run locally
+
+```bash
+./mvnw test
+./mvnw package
+SPRING_PROFILES_ACTIVE=local ./mvnw spring-boot:run
+```
+
+Swagger UI:
+
+```text
+http://localhost:8080/swagger-ui/index.html
+```
+
+## Main endpoints
+
+| Area | Endpoints |
 |---|---|
-| Framework | ASP.NET Core Web API |
-| Language | C# |
-| ORM | Entity Framework Core |
-| Database | MySQL |
-| Auth | OAuth 2.0 / JWT |
-| External integrations | Stripe, Google Notifications, Cloud Storage |
+| IAM | `POST /api/v1/auth/register`, `POST /api/v1/auth/login`, `GET /api/v1/users/me` |
+| Catalog | `GET /api/v1/products`, `POST /api/v1/products`, `GET /api/v1/categories` |
+| Warehouse | `GET /api/v1/warehouses`, `GET /api/v1/inventory`, `POST /api/v1/inventory/movements`, `GET /api/v1/inventory/alerts` |
+| Sales | `GET /api/v1/customers`, `POST /api/v1/orders`, `GET /api/v1/orders`, `PATCH /api/v1/orders/{id}/status` |
+| Logistics | `POST /api/v1/shipments`, `GET /api/v1/shipments`, `GET /api/v1/shipments/{id}/tracking`, `POST /api/v1/driver-checklists` |
+| Invoicing | `POST /api/v1/invoices`, `GET /api/v1/invoices`, `POST /api/v1/payments` |
 
----
+## Branching
 
-## Branching strategy
+The repository uses GitFlow:
 
-| Branch | Purpose |
-|---|---|
-| `main` | Stable, reviewed releases |
-| `develop` | Integration branch |
-| `feature/*` | New features and modules |
-| `fix/*` | Bug fixes and corrections |
-
-All commits follow [Conventional Commits 1.0.0](https://www.conventionalcommits.org/): `type(scope): description`.
-
----
-
-## Related repositories
-
-| Repository | Description |
-|---|---|
-| [nexa-report](https://github.com/upc-pre-202610-1asi0729-12010-VulturesD/nexa-report) | Academic report (Docs-as-Code) |
-| [nexa-website](https://github.com/upc-pre-202610-1asi0729-12010-VulturesD/nexa-website) | Landing page (HTML5 / CSS3 / JS) |
-| [nexa-webapp](https://github.com/upc-pre-202610-1asi0729-12010-VulturesD/nexa-webapp) | Web application (Vue.js) |
-
----
+- `main` for stable releases.
+- `develop` for integration.
+- `feature/*` for bounded-context work.
+- `release/*` for release stabilization.
 
 ## Team
 
-**Organization:** [upc-pre-202610-1asi0729-12010-VulturesD](https://github.com/upc-pre-202610-1asi0729-12010-VulturesD)
-
-| Code | Member | Role |
-|---|---|---|
-| U202323040 | Yucra Sandoval, Diego Sebastian | Team Leader |
-| U202411937 | Marín Cueva, César Fernando | Team Member |
-| U20241A054 | Verde Bueno, Joaquín Francisco | Team Member |
-| U202416289 | Torrejón De Los Santos, Gino Rodrigo | Team Member |
-| U202413142 | Rojas Mancilla, Gerard Gianpier | Team Member |
-
----
-
-<div align="center">
-
-<br/>
-
-**Nexa** · Universidad Peruana de Ciencias Aplicadas · 2026-10
-
-*1ASI0729 — Desarrollo de Aplicaciones Open Source · Ingeniería de Software*
-
-<br/>
-
-</div>
+| GitHub | Responsibility |
+|---|---|
+| DiegoS284 | Shared Kernel, IAM, Sales |
+| Cmarin2802 | Logistics |
+| JoaquinVerde115 | Warehouse and testing |
+| GerardRojasMancilla | Invoicing and OpenAPI |
+| R0obxdnt-bit | Catalog Management |
