@@ -10,11 +10,19 @@ Current milestone:
 - expose lightweight REST controllers for early API shape review;
 - document GitFlow and platform scope.
 
+## v0.1.1 Application Layer Foundation
+
+Patch milestone:
+
+- add command and query service contracts per bounded context;
+- add lightweight internal application services for current REST operations;
+- register application services through a shared dependency injection extension;
+- keep controllers focused on HTTP resources and responses.
+
 ## Next milestones
 
 Planned future work:
 
-- add command and query services for each bounded context;
 - add validation and ProblemDetails error responses;
 - create EF Core migrations once database decisions are confirmed;
 - add integration tests for REST endpoints;
