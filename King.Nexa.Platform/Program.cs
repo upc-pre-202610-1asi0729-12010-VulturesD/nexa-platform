@@ -7,6 +7,7 @@ using King.Nexa.Platform.Logistics.Infrastructure.Persistence.EFC.Repositories;
 using King.Nexa.Platform.Sales.Domain.Repositories;
 using King.Nexa.Platform.Sales.Infrastructure.Persistence.EFC.Repositories;
 using King.Nexa.Platform.Shared.Domain.Repositories;
+using King.Nexa.Platform.Shared.Infrastructure.DependencyInjection;
 using King.Nexa.Platform.Shared.Infrastructure.Interfaces.ASP.Configuration;
 using King.Nexa.Platform.Shared.Infrastructure.Persistence.EFC.Configuration;
 using King.Nexa.Platform.Shared.Infrastructure.Persistence.EFC.Interceptors;
@@ -19,6 +20,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 builder.Services.AddOpenApi();
+builder.Services.AddProblemDetails();
 
 builder.Services.AddScoped<AuditableEntityInterceptor>();
 builder.Services.AddDbContext<AppDbContext>((serviceProvider, options) =>
@@ -38,6 +40,7 @@ builder.Services.AddScoped<IShipmentRepository, ShipmentRepository>();
 builder.Services.AddScoped<IInventoryItemRepository, InventoryItemRepository>();
 builder.Services.AddScoped<IInvoiceRepository, InvoiceRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddPlatformApplicationServices();
 
 builder.Services.AddControllers(options =>
 {
@@ -49,6 +52,10 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+}
+else
+{
+    app.UseExceptionHandler();
 }
 
 app.UseHttpsRedirection();

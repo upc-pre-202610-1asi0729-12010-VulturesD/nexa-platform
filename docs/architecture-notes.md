@@ -15,9 +15,19 @@
 Each bounded context keeps the same high-level shape:
 
 - `Domain`: aggregates, value objects, commands, queries, and repository contracts.
-- `Application`: reserved for command/query services when behavior becomes richer.
+- `Application`: command and query service contracts plus lightweight internal services that coordinate domain operations.
 - `Infrastructure`: EF Core repositories and persistence details.
 - `Interfaces`: REST resources, assemblers, and controllers.
+
+## Application layer
+
+The application layer keeps controllers thin without pretending the platform has a completed business workflow. Each bounded context currently exposes:
+
+- command service contracts for write operations;
+- query service contracts for read operations;
+- internal command/query service implementations that coordinate repositories and the unit of work.
+
+This gives later milestones a clear place to add validation, policies, and result handling without putting those concerns in controllers.
 
 ## Shared kernel
 

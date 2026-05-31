@@ -13,7 +13,7 @@
 ![University](https://img.shields.io/badge/University-UPC-0a2540?style=flat-square)
 ![Team](https://img.shields.io/badge/Team-King-2a67d9?style=flat-square)
 ![Status](https://img.shields.io/badge/Status-Backend%20Foundation-0f766e?style=flat-square)
-![Version](https://img.shields.io/badge/Version-v0.1.0-111827?style=flat-square)
+![Version](https://img.shields.io/badge/Version-v0.1.1-111827?style=flat-square)
 
 <br/>
 
@@ -31,7 +31,7 @@ This repository is not a production deployment and does not claim completed back
 
 | Item | Status |
 |---|---|
-| Latest version | `v0.1.0` |
+| Latest version | `v0.1.1` |
 | Platform phase | Active backend foundation |
 | Backend production readiness | Not claimed |
 | Frontend integration | Future milestone |
@@ -45,6 +45,7 @@ This repository is not a production deployment and does not claim completed back
 - REST API
 - Swagger/OpenAPI-ready project structure
 - DDD-inspired bounded context organization
+- Lightweight command and query application services
 
 ## Bounded Contexts
 
