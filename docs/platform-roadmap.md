@@ -23,11 +23,22 @@ Patch milestone:
 
 Planned future work:
 
-- add validation and ProblemDetails error responses;
-- create EF Core migrations once database decisions are confirmed;
+- add integration-level validation coverage for ProblemDetails responses;
+- create EF Core migrations once the local .NET SDK and `dotnet-ef` CLI are available;
 - add integration tests for REST endpoints;
 - define authentication and authorization boundaries;
 - connect frontend applications only after stable API contracts exist.
+
+## v0.2.0 Local Modular Monolith Foundation
+
+Local architecture update:
+
+- target .NET 8 and EF Core 8;
+- use MySQL persistence through Pomelo;
+- configure XML documentation and Swagger XML comments;
+- formalize CatalogManagement, Sales, Warehouse, Logistics, Invoicing, IAM, and Shared boundaries;
+- prioritize `/api/v1/catalog-items`, `/api/v1/orders`, and `/api/v1/inventory-items`;
+- keep migrations pending until local `dotnet` tooling is available.
 
 ## Deployment note
 

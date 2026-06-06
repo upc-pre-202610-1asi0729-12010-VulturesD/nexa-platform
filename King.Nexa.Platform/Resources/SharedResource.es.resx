@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="UnexpectedError" xml:space="preserve">
+    <value>Ocurrió un error inesperado en el servidor.</value>
+  </data>
+</root>

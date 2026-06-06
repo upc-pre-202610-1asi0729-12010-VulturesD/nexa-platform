@@ -37,7 +37,7 @@
 
 ## Overview
 
-The `nexa-platform` repository houses the planned ASP.NET Core backend service layer for the Nexa platform. It establishes the domain core, repository persistence structures, and REST API controllers to support B2B order, stock lot, route, and invoice workflows.
+The `nexa-platform` repository houses the planned ASP.NET Core backend service layer for the Nexa platform. It establishes a modular monolith foundation with bounded contexts, domain invariants, MySQL persistence structures, and REST API controllers to support catalog, order, inventory, route, and invoice workflows.
 
 > [!NOTE]
 > This repository represents a local backend foundation and architecture skeleton. Complete integration with the public website or web application is planned for future platform milestones.
@@ -81,9 +81,10 @@ The `nexa-platform` repository houses the planned ASP.NET Core backend service l
 |---|---|---|---|
 | **Sales** | `Order` | `/api/v1/orders` | Managing B2B client order validation & queues. |
 | **Logistics** | `Shipment` | `/api/v1/shipments` | Delivery routes & logistics tracking. |
-| **Warehouse** | `InventoryItem` | `/api/v1/inventory-items` | Cold-storage lots stock & temperature monitoring. |
+| **Warehouse** | `InventoryItem` | `/api/v1/inventory-items` | Real stock, reservations, location & temperature monitoring. |
 | **Invoicing** | `Invoice` | `/api/v1/invoices` | Auto-generation of invoicing records. |
-| **Catalog** | `Product` | `/api/v1/products` | Cold food items & client-specific price lists. |
+| **Catalog Management** | `CatalogItem` | `/api/v1/catalog-items` | Published catalog items, pricing, categories & cold-chain requirements. |
+| **IAM** | `User` | `/api/v1/authentication/*` | Future authentication and access management boundary. |
 
 ---
 
@@ -100,12 +101,15 @@ nexa-platform/
 └── King.Nexa.Platform/         # Main ASP.NET Core project folder
     ├── Program.cs              # Bootstrapper entry point
     ├── appsettings.json        # Solution configs & database templates
+    ├── Resources/              # Shared and context i18n resources
+    ├── Migrations/             # EF migration target and MySQL init script
     ├── Shared/                 # Shared Kernel domain base
     ├── Sales/                  # Sales context domain layer
     ├── Logistics/              # Logistics context domain layer
     ├── Warehouse/              # Warehouse context domain layer
     ├── Invoicing/              # Invoicing context domain layer
-    └── CatalogManagement/      # Catalog context domain layer
+    ├── CatalogManagement/      # Catalog context domain layer
+    └── Iam/                    # Identity access management boundary
 ```
 
 ---
@@ -129,7 +133,7 @@ Ensure you have the compatible .NET SDK installed on your machine.
    ```bash
    dotnet run --project King.Nexa.Platform/King.Nexa.Platform.csproj
    ```
-   *The application uses local configurations. Ensure any required connection strings are adjusted inside `appsettings.json` for persistent storage validation.*
+   *The application is configured for MySQL through Pomelo. For local development, create `nexa_platform_db` with `King.Nexa.Platform/Migrations/mysql-init.sql` and adjust `appsettings.Development.json` or copy from `appsettings.Development.example.json`.*
 
 ---
 

@@ -1,61 +1,49 @@
-using King.Nexa.Platform.CatalogManagement.Domain.Repositories;
-using King.Nexa.Platform.CatalogManagement.Infrastructure.Persistence.EFC.Repositories;
-using King.Nexa.Platform.Invoicing.Domain.Repositories;
-using King.Nexa.Platform.Invoicing.Infrastructure.Persistence.EFC.Repositories;
-using King.Nexa.Platform.Logistics.Domain.Repositories;
-using King.Nexa.Platform.Logistics.Infrastructure.Persistence.EFC.Repositories;
-using King.Nexa.Platform.Sales.Domain.Repositories;
-using King.Nexa.Platform.Sales.Infrastructure.Persistence.EFC.Repositories;
-using King.Nexa.Platform.Shared.Domain.Repositories;
+using King.Nexa.Platform.CatalogManagement.Infrastructure.DependencyInjection;
+using King.Nexa.Platform.Iam.Infrastructure.DependencyInjection;
+using King.Nexa.Platform.Invoicing.Infrastructure.DependencyInjection;
+using King.Nexa.Platform.Logistics.Infrastructure.DependencyInjection;
+using King.Nexa.Platform.Sales.Infrastructure.DependencyInjection;
 using King.Nexa.Platform.Shared.Infrastructure.DependencyInjection;
-using King.Nexa.Platform.Shared.Infrastructure.Interfaces.ASP.Configuration;
-using King.Nexa.Platform.Shared.Infrastructure.Persistence.EFC.Configuration;
-using King.Nexa.Platform.Shared.Infrastructure.Persistence.EFC.Interceptors;
-using King.Nexa.Platform.Shared.Infrastructure.Persistence.EFC.Repositories;
-using King.Nexa.Platform.Warehouse.Domain.Repositories;
-using King.Nexa.Platform.Warehouse.Infrastructure.Persistence.EFC.Repositories;
-using Microsoft.EntityFrameworkCore;
+using King.Nexa.Platform.Shared.Infrastructure.Interfaces.AspNetCore.Configuration;
+using King.Nexa.Platform.Shared.Infrastructure.Pipeline.Middleware.Extensions;
+using King.Nexa.Platform.Warehouse.Infrastructure.DependencyInjection;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
-builder.Services.AddOpenApi();
-builder.Services.AddProblemDetails();
 
-builder.Services.AddScoped<AuditableEntityInterceptor>();
-builder.Services.AddDbContext<AppDbContext>((serviceProvider, options) =>
-{
-    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-    if (string.IsNullOrWhiteSpace(connectionString))
-        throw new InvalidOperationException("DefaultConnection is not configured.");
-
-    options.UseSqlServer(connectionString)
-        .AddInterceptors(serviceProvider.GetRequiredService<AuditableEntityInterceptor>());
-});
-
-builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped<IOrderRepository, OrderRepository>();
-builder.Services.AddScoped<IShipmentRepository, ShipmentRepository>();
-builder.Services.AddScoped<IInventoryItemRepository, InventoryItemRepository>();
-builder.Services.AddScoped<IInvoiceRepository, InvoiceRepository>();
-builder.Services.AddScoped<IProductRepository, ProductRepository>();
-builder.Services.AddPlatformApplicationServices();
+builder.Services.AddSharedInfrastructure(builder.Configuration);
+builder.Services.AddCatalogManagement();
+builder.Services.AddSales();
+builder.Services.AddWarehouse();
+builder.Services.AddLogistics();
+builder.Services.AddInvoicing();
+builder.Services.AddIam();
 
 builder.Services.AddControllers(options =>
 {
     options.Conventions.Add(new KebabCaseRouteNamingConvention());
 });
+builder.Services.AddLocalization();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(options =>
+{
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+
+    if (File.Exists(xmlPath))
+        options.IncludeXmlComments(xmlPath);
+});
 
 var app = builder.Build();
 
+app.UseGlobalExceptionHandling();
+
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
-}
-else
-{
-    app.UseExceptionHandler();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
