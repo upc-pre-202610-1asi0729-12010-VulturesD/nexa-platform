@@ -1,6 +1,6 @@
 using King.Nexa.Platform.Invoicing.Domain.Model.Commands;
 using King.Nexa.Platform.Invoicing.Domain.Model.ValueObjects;
-using King.Nexa.Platform.Shared.Domain.Model;
+using King.Nexa.Platform.Shared.Domain.Model.Entities;
 
 namespace King.Nexa.Platform.Invoicing.Domain.Model.Aggregates;
 

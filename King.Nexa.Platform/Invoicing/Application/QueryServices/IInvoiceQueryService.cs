@@ -1,7 +1,7 @@
 using King.Nexa.Platform.Invoicing.Domain.Model.Aggregates;
 using King.Nexa.Platform.Invoicing.Domain.Model.Queries;
 
-namespace King.Nexa.Platform.Invoicing.Application.Services;
+namespace King.Nexa.Platform.Invoicing.Application.QueryServices;
 
 public interface IInvoiceQueryService
 {
