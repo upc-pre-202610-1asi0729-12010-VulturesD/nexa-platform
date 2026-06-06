@@ -4,7 +4,7 @@ using King.Nexa.Platform.Shared.Domain.Repositories;
 
 namespace King.Nexa.Platform.CatalogManagement.Domain.Repositories;
 
-public interface IProductRepository : IBaseRepository<Product>
+public interface ICatalogItemRepository : IBaseRepository<CatalogItem>
 {
-    Task<Product?> FindByProductCodeAsync(ProductCode productCode, CancellationToken cancellationToken = default);
+    Task<CatalogItem?> FindByCatalogItemIdAsync(CatalogItemId catalogItemId, CancellationToken cancellationToken = default);
 }

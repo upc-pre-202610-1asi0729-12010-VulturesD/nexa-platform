@@ -1,10 +1,10 @@
 namespace King.Nexa.Platform.CatalogManagement.Domain.Model.ValueObjects;
 
-public sealed record ProductCode
+public sealed record ProductId
 {
-    public ProductCode(string value)
+    public ProductId(string value)
     {
-        if (string.IsNullOrWhiteSpace(value)) throw new ArgumentException("Product code is required.", nameof(value));
+        if (string.IsNullOrWhiteSpace(value)) throw new ArgumentException("Product id is required.", nameof(value));
         Value = value.Trim().ToUpperInvariant();
     }
 

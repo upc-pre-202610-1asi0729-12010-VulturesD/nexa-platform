@@ -1,3 +1,3 @@
 namespace King.Nexa.Platform.CatalogManagement.Domain.Model.Queries;
 
-public record GetAllProductsQuery;
+public record GetCatalogItemByIdQuery(int Id);
