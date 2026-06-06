@@ -1,4 +1,5 @@
-using King.Nexa.Platform.Invoicing.Application.Services;
+using King.Nexa.Platform.Invoicing.Application.CommandServices;
+using King.Nexa.Platform.Invoicing.Application.QueryServices;
 using King.Nexa.Platform.Invoicing.Domain.Model.Aggregates;
 using King.Nexa.Platform.Invoicing.Domain.Model.Queries;
 using King.Nexa.Platform.Invoicing.Domain.Repositories;
