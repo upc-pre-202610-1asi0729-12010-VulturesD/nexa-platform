@@ -26,7 +26,7 @@ public class Order : AuditableEntity
         CustomerId = command.CustomerId;
         Items = command.Items.Select(item => new OrderItem(item)).ToList();
         Total = CalculateTotal(Items);
-        Status = OrderStatus.Draft;
+        Status = OrderStatus.Pending;
     }
 
     public OrderNumber OrderNumber { get; private set; }

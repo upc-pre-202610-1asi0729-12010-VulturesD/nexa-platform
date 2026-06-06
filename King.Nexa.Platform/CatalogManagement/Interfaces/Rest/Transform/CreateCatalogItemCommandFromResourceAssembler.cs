@@ -14,6 +14,7 @@ public static class CreateCatalogItemCommandFromResourceAssembler
             new BrandName(resource.BrandName),
             new CategoryName(resource.CategoryName),
             resource.Description,
+            resource.ImageUrl,
             new Money(resource.UnitPriceAmount, resource.UnitPriceCurrency),
             new StockQuantity(resource.AvailableStock),
             Enum.Parse<ColdChainRequirement>(resource.ColdChainRequirement, true));

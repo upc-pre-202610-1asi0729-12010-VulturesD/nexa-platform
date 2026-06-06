@@ -12,6 +12,7 @@ public record CreateCatalogItemCommand(
     BrandName BrandName,
     CategoryName CategoryName,
     string Description,
+    string ImageUrl,
     Money UnitPrice,
     StockQuantity AvailableStock,
     ColdChainRequirement ColdChainRequirement);

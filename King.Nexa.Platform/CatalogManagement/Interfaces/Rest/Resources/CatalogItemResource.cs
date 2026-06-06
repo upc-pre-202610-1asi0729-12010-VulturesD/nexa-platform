@@ -11,6 +11,7 @@ public record CatalogItemResource(
     string BrandName,
     string CategoryName,
     string Description,
+    string ImageUrl,
     decimal UnitPriceAmount,
     string UnitPriceCurrency,
     int AvailableStock,

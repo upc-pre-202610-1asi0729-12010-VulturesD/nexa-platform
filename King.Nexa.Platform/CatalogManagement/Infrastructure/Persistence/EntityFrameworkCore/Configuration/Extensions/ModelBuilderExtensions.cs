@@ -41,6 +41,10 @@ public static class ModelBuilderExtensions
             .HasColumnName("description")
             .HasMaxLength(500)
             .IsRequired();
+        catalogItem.Property(item => item.ImageUrl)
+            .HasColumnName("image_url")
+            .HasMaxLength(240)
+            .IsRequired();
         catalogItem.OwnsOne(item => item.UnitPrice, money =>
         {
             money.Property(value => value.Amount).HasColumnName("unit_price_amount").HasPrecision(12, 2).IsRequired();

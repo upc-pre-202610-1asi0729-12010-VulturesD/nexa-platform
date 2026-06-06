@@ -14,6 +14,7 @@ public static class CatalogItemResourceFromEntityAssembler
             entity.BrandName.Value,
             entity.CategoryName.Value,
             entity.Description,
+            entity.ImageUrl,
             entity.UnitPrice.Amount,
             entity.UnitPrice.Currency,
             entity.AvailableStock.Value,

@@ -17,6 +17,7 @@ public class CatalogItem : AuditableEntity
         BrandName = null!;
         CategoryName = null!;
         Description = string.Empty;
+        ImageUrl = string.Empty;
         UnitPrice = null!;
         AvailableStock = null!;
     }
@@ -29,6 +30,7 @@ public class CatalogItem : AuditableEntity
         BrandName = command.BrandName;
         CategoryName = command.CategoryName;
         Description = command.Description.Trim();
+        ImageUrl = command.ImageUrl.Trim();
         UnitPrice = command.UnitPrice;
         AvailableStock = command.AvailableStock;
         ColdChainRequirement = command.ColdChainRequirement;
@@ -47,6 +49,8 @@ public class CatalogItem : AuditableEntity
 
     public string Description { get; private set; }
 
+    public string ImageUrl { get; private set; }
+
     public Money UnitPrice { get; private set; }
 
     public StockQuantity AvailableStock { get; private set; }
@@ -61,6 +65,7 @@ public class CatalogItem : AuditableEntity
         BrandName = command.BrandName;
         CategoryName = command.CategoryName;
         Description = command.Description.Trim();
+        ImageUrl = command.ImageUrl.Trim();
         UnitPrice = command.UnitPrice;
         AvailableStock = command.AvailableStock;
         ColdChainRequirement = command.ColdChainRequirement;

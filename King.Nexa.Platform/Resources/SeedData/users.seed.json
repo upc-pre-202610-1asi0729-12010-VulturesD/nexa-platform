@@ -1,0 +1,32 @@
+[
+  {
+    "username": "admin@nexa.com",
+    "email": "admin@nexa.com",
+    "password": "NexaDemo2026!",
+    "role": "Admin"
+  },
+  {
+    "username": "operations@nexa.com",
+    "email": "operations@nexa.com",
+    "password": "NexaDemo2026!",
+    "role": "OperationsManager"
+  },
+  {
+    "username": "warehouse@nexa.com",
+    "email": "warehouse@nexa.com",
+    "password": "NexaDemo2026!",
+    "role": "WarehouseManager"
+  },
+  {
+    "username": "sales@nexa.com",
+    "email": "sales@nexa.com",
+    "password": "NexaDemo2026!",
+    "role": "SalesRepresentative"
+  },
+  {
+    "username": "buyer.demo@nexa.com",
+    "email": "buyer.demo@nexa.com",
+    "password": "NexaDemo2026!",
+    "role": "Buyer"
+  }
+]
