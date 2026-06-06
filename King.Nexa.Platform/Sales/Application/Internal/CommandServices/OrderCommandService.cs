@@ -1,4 +1,5 @@
-using King.Nexa.Platform.Sales.Application.Services;
+using King.Nexa.Platform.Sales.Application.CommandServices;
+using King.Nexa.Platform.Sales.Application.QueryServices;
 using King.Nexa.Platform.Sales.Domain.Model.Aggregates;
 using King.Nexa.Platform.Sales.Domain.Model.Commands;
 using King.Nexa.Platform.Sales.Domain.Repositories;
@@ -21,7 +22,29 @@ public class OrderCommandService(IOrderRepository orderRepository, IUnitOfWork u
         var order = await orderRepository.FindByIdAsync(command.OrderId, cancellationToken);
         if (order is null) return null;
 
-        order.Confirm();
+        order.Confirm(command.PaymentConfirmation, command.InventoryReservation);
+        orderRepository.Update(order);
+        await unitOfWork.CompleteAsync(cancellationToken);
+        return order;
+    }
+
+    public async Task<Order?> RejectAsync(RejectOrderCommand command, CancellationToken cancellationToken = default)
+    {
+        var order = await orderRepository.FindByIdAsync(command.OrderId, cancellationToken);
+        if (order is null) return null;
+
+        order.Reject(command.RejectionReason);
+        orderRepository.Update(order);
+        await unitOfWork.CompleteAsync(cancellationToken);
+        return order;
+    }
+
+    public async Task<Order?> CancelAsync(CancelOrderCommand command, CancellationToken cancellationToken = default)
+    {
+        var order = await orderRepository.FindByIdAsync(command.OrderId, cancellationToken);
+        if (order is null) return null;
+
+        order.Cancel();
         orderRepository.Update(order);
         await unitOfWork.CompleteAsync(cancellationToken);
         return order;

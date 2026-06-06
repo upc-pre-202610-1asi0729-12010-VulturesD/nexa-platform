@@ -1,3 +1,3 @@
-namespace King.Nexa.Platform.Sales.Interfaces.REST.Resources;
+namespace King.Nexa.Platform.Sales.Interfaces.Rest.Resources;
 
-public record ConfirmOrderResource(int OrderId);
+public record ConfirmOrderResource(string PaymentConfirmation, string InventoryReservation);

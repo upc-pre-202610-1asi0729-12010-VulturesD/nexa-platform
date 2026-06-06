@@ -1,7 +1,7 @@
 using King.Nexa.Platform.Sales.Domain.Model.Aggregates;
 using King.Nexa.Platform.Sales.Domain.Model.Queries;
 
-namespace King.Nexa.Platform.Sales.Application.Services;
+namespace King.Nexa.Platform.Sales.Application.QueryServices;
 
 public interface IOrderQueryService
 {

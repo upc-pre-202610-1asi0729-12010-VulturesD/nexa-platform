@@ -7,4 +7,8 @@ namespace King.Nexa.Platform.Sales.Domain.Repositories;
 public interface IOrderRepository : IBaseRepository<Order>
 {
     Task<Order?> FindByOrderNumberAsync(OrderNumber orderNumber, CancellationToken cancellationToken = default);
+
+    Task<Order?> FindByIdWithItemsAsync(int id, CancellationToken cancellationToken = default);
+
+    Task<IEnumerable<Order>> ListWithItemsAsync(CancellationToken cancellationToken = default);
 }
