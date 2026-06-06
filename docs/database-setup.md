@@ -53,3 +53,18 @@ Expected tables after `database update`:
 - `__ef_migrations_history`
 
 Prefer loading data through the API after migrations, because audit columns are filled by the EF Core interceptor.
+
+## Development Seed Data
+
+The backend includes development seed files under `King.Nexa.Platform/Resources/SeedData/`.
+Seed execution is controlled by:
+
+```json
+{
+  "SeedData": {
+    "Enabled": true
+  }
+}
+```
+
+Keep `SeedData:Enabled` disabled outside local development or explicit demo environments.
