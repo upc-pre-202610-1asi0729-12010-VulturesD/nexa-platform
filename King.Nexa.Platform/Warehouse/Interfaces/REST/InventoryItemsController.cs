@@ -33,6 +33,9 @@ public class InventoryItemsController(IInventoryItemCommandService inventoryItem
         return item is null ? NotFound() : Ok(InventoryItemResourceFromEntityAssembler.ToResourceFromEntity(item));
     }
 
+    /// <summary>
+    /// Gets one inventory item by the catalog item identifier shared with sales.
+    /// </summary>
     [HttpGet("by-catalog-item/{catalogItemId}")]
     public async Task<IActionResult> GetInventoryItemByCatalogItemId(string catalogItemId, CancellationToken cancellationToken)
     {
@@ -51,6 +54,9 @@ public class InventoryItemsController(IInventoryItemCommandService inventoryItem
         return CreatedAtAction(nameof(GetInventoryItemById), new { id = item.Id }, InventoryItemResourceFromEntityAssembler.ToResourceFromEntity(item));
     }
 
+    /// <summary>
+    /// Reserves inventory units for a sales order workflow.
+    /// </summary>
     [HttpPost("{id:int}/reserve")]
     public async Task<IActionResult> ReserveInventory(int id, ReserveInventoryResource resource, CancellationToken cancellationToken)
     {
@@ -61,6 +67,9 @@ public class InventoryItemsController(IInventoryItemCommandService inventoryItem
         return Ok(InventoryItemResourceFromEntityAssembler.ToResourceFromEntity(item));
     }
 
+    /// <summary>
+    /// Releases previously reserved inventory units.
+    /// </summary>
     [HttpPost("{id:int}/release-reservation")]
     public async Task<IActionResult> ReleaseInventoryReservation(int id, ReserveInventoryResource resource, CancellationToken cancellationToken)
     {
