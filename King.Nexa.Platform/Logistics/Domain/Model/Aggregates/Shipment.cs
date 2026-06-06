@@ -1,6 +1,6 @@
 using King.Nexa.Platform.Logistics.Domain.Model.Commands;
 using King.Nexa.Platform.Logistics.Domain.Model.ValueObjects;
-using King.Nexa.Platform.Shared.Domain.Model;
+using King.Nexa.Platform.Shared.Domain.Model.Entities;
 
 namespace King.Nexa.Platform.Logistics.Domain.Model.Aggregates;
 

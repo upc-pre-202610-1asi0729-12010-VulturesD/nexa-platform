@@ -1,11 +1,12 @@
-using King.Nexa.Platform.Logistics.Application.Services;
+using King.Nexa.Platform.Logistics.Application.CommandServices;
+using King.Nexa.Platform.Logistics.Application.QueryServices;
 using King.Nexa.Platform.Logistics.Domain.Model.Commands;
 using King.Nexa.Platform.Logistics.Domain.Model.Queries;
-using King.Nexa.Platform.Logistics.Interfaces.REST.Resources;
-using King.Nexa.Platform.Logistics.Interfaces.REST.Transform;
+using King.Nexa.Platform.Logistics.Interfaces.Rest.Resources;
+using King.Nexa.Platform.Logistics.Interfaces.Rest.Transform;
 using Microsoft.AspNetCore.Mvc;
 
-namespace King.Nexa.Platform.Logistics.Interfaces.REST;
+namespace King.Nexa.Platform.Logistics.Interfaces.Rest;
 
 [ApiController]
 [Route("api/v1/[controller]")]
