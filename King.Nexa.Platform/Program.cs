@@ -6,6 +6,7 @@ using King.Nexa.Platform.Sales.Infrastructure.DependencyInjection;
 using King.Nexa.Platform.Shared.Infrastructure.DependencyInjection;
 using King.Nexa.Platform.Shared.Infrastructure.Interfaces.AspNetCore.Configuration;
 using King.Nexa.Platform.Shared.Infrastructure.Pipeline.Middleware.Extensions;
+using King.Nexa.Platform.Shared.Infrastructure.Seed;
 using King.Nexa.Platform.Warehouse.Infrastructure.DependencyInjection;
 using System.Reflection;
 
@@ -57,6 +58,10 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    using var scope = app.Services.CreateScope();
+    var seedDataService = scope.ServiceProvider.GetRequiredService<ISeedDataService>();
+    await seedDataService.SeedAsync();
 }
 
 app.UseHttpsRedirection();
