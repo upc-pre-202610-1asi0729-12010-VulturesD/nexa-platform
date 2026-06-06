@@ -1,7 +1,7 @@
 using King.Nexa.Platform.Logistics.Domain.Model.Aggregates;
 using King.Nexa.Platform.Logistics.Domain.Model.Queries;
 
-namespace King.Nexa.Platform.Logistics.Application.Services;
+namespace King.Nexa.Platform.Logistics.Application.QueryServices;
 
 public interface IShipmentQueryService
 {

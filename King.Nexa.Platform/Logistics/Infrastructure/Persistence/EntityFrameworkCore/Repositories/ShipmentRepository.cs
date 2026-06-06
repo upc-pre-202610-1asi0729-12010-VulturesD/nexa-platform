@@ -1,11 +1,11 @@
 using King.Nexa.Platform.Logistics.Domain.Model.Aggregates;
 using King.Nexa.Platform.Logistics.Domain.Model.ValueObjects;
 using King.Nexa.Platform.Logistics.Domain.Repositories;
-using King.Nexa.Platform.Shared.Infrastructure.Persistence.EFC.Configuration;
-using King.Nexa.Platform.Shared.Infrastructure.Persistence.EFC.Repositories;
+using King.Nexa.Platform.Shared.Infrastructure.Persistence.EntityFrameworkCore.Configuration;
+using King.Nexa.Platform.Shared.Infrastructure.Persistence.EntityFrameworkCore.Repositories;
 using Microsoft.EntityFrameworkCore;
 
-namespace King.Nexa.Platform.Logistics.Infrastructure.Persistence.EFC.Repositories;
+namespace King.Nexa.Platform.Logistics.Infrastructure.Persistence.EntityFrameworkCore.Repositories;
 
 public class ShipmentRepository(AppDbContext context) : BaseRepository<Shipment>(context), IShipmentRepository
 {
