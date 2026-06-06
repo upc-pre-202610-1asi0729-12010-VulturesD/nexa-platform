@@ -1,23 +1,15 @@
 namespace King.Nexa.Platform.Warehouse.Domain.Model.ValueObjects;
 
+/// <summary>
+/// Non-negative stock quantity value object.
+/// </summary>
 public sealed record StockQuantity
 {
-    public StockQuantity(int availableUnits, int reservedUnits = 0)
+    public StockQuantity(int value)
     {
-        if (availableUnits < 0) throw new ArgumentOutOfRangeException(nameof(availableUnits));
-        if (reservedUnits < 0) throw new ArgumentOutOfRangeException(nameof(reservedUnits));
-        AvailableUnits = availableUnits;
-        ReservedUnits = reservedUnits;
+        if (value < 0) throw new ArgumentOutOfRangeException(nameof(value), "Stock quantity cannot be negative.");
+        Value = value;
     }
 
-    public int AvailableUnits { get; }
-
-    public int ReservedUnits { get; }
-
-    public StockQuantity Reserve(int units)
-    {
-        if (units <= 0) throw new ArgumentOutOfRangeException(nameof(units));
-        if (units > AvailableUnits) throw new InvalidOperationException("Requested units exceed available stock.");
-        return new StockQuantity(AvailableUnits - units, ReservedUnits + units);
-    }
+    public int Value { get; }
 }

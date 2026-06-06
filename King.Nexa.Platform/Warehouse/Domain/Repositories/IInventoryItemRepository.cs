@@ -6,5 +6,5 @@ namespace King.Nexa.Platform.Warehouse.Domain.Repositories;
 
 public interface IInventoryItemRepository : IBaseRepository<InventoryItem>
 {
-    Task<InventoryItem?> FindByProductAndLotAsync(string productCode, LotCode lotCode, CancellationToken cancellationToken = default);
+    Task<InventoryItem?> FindByCatalogItemIdAsync(CatalogItemId catalogItemId, CancellationToken cancellationToken = default);
 }

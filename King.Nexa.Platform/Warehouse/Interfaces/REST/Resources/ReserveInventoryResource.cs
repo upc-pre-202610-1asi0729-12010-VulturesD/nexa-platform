@@ -1,3 +1,6 @@
-namespace King.Nexa.Platform.Warehouse.Interfaces.REST.Resources;
+namespace King.Nexa.Platform.Warehouse.Interfaces.Rest.Resources;
 
-public record ReserveInventoryResource(int Units);
+/// <summary>
+/// Data required to reserve or release inventory units.
+/// </summary>
+public record ReserveInventoryResource(string ReservationCode, int Units);

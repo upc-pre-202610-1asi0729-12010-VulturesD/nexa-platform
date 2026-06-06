@@ -1,7 +1,7 @@
 using King.Nexa.Platform.Invoicing.Domain.Model.Aggregates;
-using King.Nexa.Platform.Invoicing.Interfaces.REST.Resources;
+using King.Nexa.Platform.Invoicing.Interfaces.Rest.Resources;
 
-namespace King.Nexa.Platform.Invoicing.Interfaces.REST.Transform;
+namespace King.Nexa.Platform.Invoicing.Interfaces.Rest.Transform;
 
 public static class InvoiceResourceFromEntityAssembler
 {

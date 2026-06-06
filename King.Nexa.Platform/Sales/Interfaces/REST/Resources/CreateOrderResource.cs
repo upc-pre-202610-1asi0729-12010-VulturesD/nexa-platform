@@ -1,3 +1,6 @@
-namespace King.Nexa.Platform.Sales.Interfaces.REST.Resources;
+namespace King.Nexa.Platform.Sales.Interfaces.Rest.Resources;
 
-public record CreateOrderResource(string OrderNumber, string CustomerId);
+/// <summary>
+/// Data required to create an order.
+/// </summary>
+public record CreateOrderResource(string OrderNumber, string CustomerId, IReadOnlyCollection<CreateOrderItemResource> Items);

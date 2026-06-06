@@ -1,8 +1,8 @@
 using King.Nexa.Platform.Logistics.Domain.Model.Commands;
 using King.Nexa.Platform.Logistics.Domain.Model.ValueObjects;
-using King.Nexa.Platform.Logistics.Interfaces.REST.Resources;
+using King.Nexa.Platform.Logistics.Interfaces.Rest.Resources;
 
-namespace King.Nexa.Platform.Logistics.Interfaces.REST.Transform;
+namespace King.Nexa.Platform.Logistics.Interfaces.Rest.Transform;
 
 public static class ScheduleShipmentCommandFromResourceAssembler
 {

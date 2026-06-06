@@ -1,13 +1,15 @@
 # Nexa Platform Architecture Notes
 
-`nexa-platform` is the planned backend service layer for the Nexa B2B platform. The current repository establishes a small ASP.NET Core foundation that can grow into the service layer for later milestones.
+`nexa-platform` is the planned backend service layer for the Nexa B2B platform. The current repository establishes a modular monolith foundation that can grow into the service layer for later milestones.
 
 ## Application style
 
 - ASP.NET Core Web API with controller-based REST endpoints.
 - C# project under `King.Nexa.Platform`.
-- Entity Framework Core is prepared as the persistence technology.
+- .NET 8, Entity Framework Core 8, MySQL, Pomelo, Humanizer, XML docs, and i18n resources.
+- A single physical MySQL database stores all bounded context tables.
 - REST routes use `/api/v1` and plural resource names.
+- REST routes are kebab-case; tables and columns are plural snake_case.
 - Source folders follow bounded context boundaries instead of generic technical buckets.
 
 ## Layering
@@ -39,5 +41,8 @@ The shared kernel currently provides:
 - `AppDbContext` foundation;
 - audit timestamp interceptor;
 - kebab-case route naming convention.
+- global ProblemDetails middleware;
+- snake_case/plural EF naming convention;
+- context-specific dependency injection extensions.
 
 This is intentionally a foundation. It is not a deployed production backend.

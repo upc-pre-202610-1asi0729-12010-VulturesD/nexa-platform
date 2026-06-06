@@ -1,4 +1,5 @@
-using King.Nexa.Platform.Logistics.Application.Services;
+using King.Nexa.Platform.Logistics.Application.CommandServices;
+using King.Nexa.Platform.Logistics.Application.QueryServices;
 using King.Nexa.Platform.Logistics.Domain.Model.Aggregates;
 using King.Nexa.Platform.Logistics.Domain.Model.Commands;
 using King.Nexa.Platform.Logistics.Domain.Repositories;

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="BusinessRuleViolation" xml:space="preserve">
+    <value>Violación de regla de negocio.</value>
+  </data>
+</root>

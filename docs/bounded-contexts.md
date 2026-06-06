@@ -1,6 +1,6 @@
 # Bounded Contexts
 
-The v0.1.0 platform foundation defines five bounded contexts. Each context starts with one aggregate root and a small REST-facing resource model.
+The v0.2.0 local platform foundation defines five business bounded contexts, one IAM application context, and a Shared Kernel. The first core endpoints are Catalog Management, Sales, and Warehouse.
 
 | Context | Owner | Aggregate | REST resource |
 |---|---|---|---|
@@ -8,7 +8,8 @@ The v0.1.0 platform foundation defines five bounded contexts. Each context start
 | Logistics | Cmarin2802 | `Shipment` | `/api/v1/shipments` |
 | Warehouse | JoaquinVerde115 | `InventoryItem` | `/api/v1/inventory-items` |
 | Invoicing | GerardRojasMancilla | `Invoice` | `/api/v1/invoices` |
-| Catalog Management | R0obxdnt-bit | `Product` | `/api/v1/products` |
+| Catalog Management | R0obxdnt-bit | `CatalogItem` | `/api/v1/catalog-items` |
+| IAM | Shared | `User` | `/api/v1/authentication/*` |
 
 ## Shared ownership
 

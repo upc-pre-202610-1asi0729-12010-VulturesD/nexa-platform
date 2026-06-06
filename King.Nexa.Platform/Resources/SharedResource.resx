@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="InvalidRequestTitle" xml:space="preserve">
+    <value>Invalid request.</value>
+  </data>
+  <data name="BusinessRuleViolationTitle" xml:space="preserve">
+    <value>Business rule violation.</value>
+  </data>
+  <data name="UnexpectedErrorTitle" xml:space="preserve">
+    <value>Unexpected error.</value>
+  </data>
+  <data name="UnexpectedErrorDetail" xml:space="preserve">
+    <value>An unexpected server error occurred.</value>
+  </data>
+</root>

@@ -1,0 +1,45 @@
+using King.Nexa.Platform.Warehouse.Domain.Model.Aggregates;
+using King.Nexa.Platform.Warehouse.Domain.Model.ValueObjects;
+using Microsoft.EntityFrameworkCore;
+
+namespace King.Nexa.Platform.Warehouse.Infrastructure.Persistence.EntityFrameworkCore.Configuration.Extensions;
+
+public static class ModelBuilderExtensions
+{
+    public static void ApplyWarehouseConfiguration(this ModelBuilder builder)
+    {
+        var inventoryItem = builder.Entity<InventoryItem>();
+
+        inventoryItem.ToTable("inventory_items");
+        inventoryItem.HasKey(item => item.Id);
+        inventoryItem.Property(item => item.ProductId)
+            .HasConversion(value => value.Value, value => new ProductId(value))
+            .HasColumnName("product_id")
+            .HasMaxLength(64)
+            .IsRequired();
+        inventoryItem.Property(item => item.CatalogItemId)
+            .HasConversion(value => value.Value, value => new CatalogItemId(value))
+            .HasColumnName("catalog_item_id")
+            .HasMaxLength(64)
+            .IsRequired();
+        inventoryItem.Property(item => item.AvailableQuantity)
+            .HasConversion(value => value.Value, value => new StockQuantity(value))
+            .HasColumnName("available_quantity")
+            .IsRequired();
+        inventoryItem.Property(item => item.ReservedQuantity)
+            .HasConversion(value => value.Value, value => new StockQuantity(value))
+            .HasColumnName("reserved_quantity")
+            .IsRequired();
+        inventoryItem.Property(item => item.WarehouseLocation)
+            .HasConversion(value => value.Value, value => new WarehouseLocation(value))
+            .HasColumnName("warehouse_location")
+            .HasMaxLength(120)
+            .IsRequired();
+        inventoryItem.OwnsOne(item => item.TemperatureRange, temperature =>
+        {
+            temperature.Property(value => value.MinimumTemperature).HasColumnName("minimum_temperature").HasPrecision(6, 2);
+            temperature.Property(value => value.MaximumTemperature).HasColumnName("maximum_temperature").HasPrecision(6, 2);
+        });
+        inventoryItem.HasIndex(item => item.CatalogItemId).IsUnique();
+    }
+}
