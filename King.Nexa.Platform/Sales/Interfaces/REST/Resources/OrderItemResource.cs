@@ -1,5 +1,8 @@
 namespace King.Nexa.Platform.Sales.Interfaces.Rest.Resources;
 
+/// <summary>
+/// Order item response resource with pricing information.
+/// </summary>
 public record OrderItemResource(
     int Id,
     string ProductId,

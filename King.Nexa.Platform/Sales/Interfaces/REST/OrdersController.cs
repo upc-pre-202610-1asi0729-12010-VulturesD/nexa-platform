@@ -44,6 +44,9 @@ public class OrdersController(IOrderCommandService orderCommandService, IOrderQu
         return CreatedAtAction(nameof(GetOrderById), new { id = order.Id }, OrderResourceFromEntityAssembler.ToResourceFromEntity(order));
     }
 
+    /// <summary>
+    /// Confirms an order after payment and inventory reservation are available.
+    /// </summary>
     [HttpPost("{id:int}/confirm")]
     public async Task<IActionResult> ConfirmOrder(int id, ConfirmOrderResource resource, CancellationToken cancellationToken)
     {
@@ -54,6 +57,9 @@ public class OrdersController(IOrderCommandService orderCommandService, IOrderQu
         return Ok(OrderResourceFromEntityAssembler.ToResourceFromEntity(order));
     }
 
+    /// <summary>
+    /// Rejects an order with the business reason that prevents fulfillment.
+    /// </summary>
     [HttpPost("{id:int}/reject")]
     public async Task<IActionResult> RejectOrder(int id, RejectOrderResource resource, CancellationToken cancellationToken)
     {
@@ -62,6 +68,9 @@ public class OrdersController(IOrderCommandService orderCommandService, IOrderQu
         return Ok(OrderResourceFromEntityAssembler.ToResourceFromEntity(order));
     }
 
+    /// <summary>
+    /// Cancels an order that has not completed the sales workflow.
+    /// </summary>
     [HttpPost("{id:int}/cancel")]
     public async Task<IActionResult> CancelOrder(int id, CancellationToken cancellationToken)
     {
