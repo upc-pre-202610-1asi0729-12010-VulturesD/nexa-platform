@@ -25,6 +25,7 @@ Planned future work:
 
 - add integration-level validation coverage for ProblemDetails responses;
 - create EF Core migrations once the local .NET SDK and `dotnet-ef` CLI are available;
+- use `docs/database-setup.md` as the local MySQL and migration runbook;
 - add integration tests for REST endpoints;
 - define authentication and authorization boundaries;
 - connect frontend applications only after stable API contracts exist.

@@ -133,7 +133,7 @@ Ensure you have the compatible .NET SDK installed on your machine.
    ```bash
    dotnet run --project King.Nexa.Platform/King.Nexa.Platform.csproj
    ```
-   *The application is configured for MySQL through Pomelo. For local development, create `nexa_platform_db` with `King.Nexa.Platform/Migrations/mysql-init.sql` and adjust `appsettings.Development.json` or copy from `appsettings.Development.example.json`.*
+   *The application is configured for MySQL through Pomelo. For local development, create `nexa_platform_db` with `King.Nexa.Platform/Migrations/mysql-init.sql`, then use `King.Nexa.Platform/appsettings.Local.json` for machine-specific credentials. See `docs/database-setup.md` for the migration flow.*
 
 ---
 
