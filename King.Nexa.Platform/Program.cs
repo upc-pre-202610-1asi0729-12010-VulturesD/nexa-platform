@@ -10,8 +10,21 @@ using King.Nexa.Platform.Warehouse.Infrastructure.DependencyInjection;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Configuration.AddJsonFile("appsettings.Local.json", optional: true, reloadOnChange: true);
+
+const string frontendCorsPolicy = "AllowFrontend";
 
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(frontendCorsPolicy, policy =>
+    {
+        policy
+            .WithOrigins("http://localhost:5173", "https://localhost:5173")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
 
 builder.Services.AddSharedInfrastructure(builder.Configuration);
 builder.Services.AddCatalogManagement();
@@ -47,6 +60,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors(frontendCorsPolicy);
 app.UseAuthorization();
 app.MapControllers();
 
