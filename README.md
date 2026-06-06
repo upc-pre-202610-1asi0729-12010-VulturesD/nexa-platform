@@ -39,6 +39,8 @@
 
 The `nexa-platform` repository houses the planned ASP.NET Core backend service layer for the Nexa platform. It establishes a modular monolith foundation with bounded contexts, domain invariants, MySQL persistence structures, and REST API controllers to support catalog, order, inventory, route, and invoice workflows.
 
+**Current stable backend version:** `v0.3.0`
+
 > [!NOTE]
 > This repository represents a local backend foundation and architecture skeleton. Complete integration with the public website or web application is planned for future platform milestones.
 
