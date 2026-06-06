@@ -102,13 +102,33 @@ public class SeedDataService(
     private async Task SeedUsersAsync(CancellationToken cancellationToken)
     {
         var records = await ReadSeedFileAsync<UserSeedRecord>("users.seed.json", cancellationToken);
+        
+        var allUsers = await userRepository.ListAsync(cancellationToken);
+        foreach (var user in allUsers)
+        {
+            if (!records.Any(r => r.Username.Equals(user.Username, StringComparison.OrdinalIgnoreCase)))
+            {
+                userRepository.Remove(user);
+            }
+        }
+
         foreach (var record in records)
         {
-            if (await userRepository.FindByUsernameAsync(record.Username, cancellationToken) is not null)
-                continue;
-
-            var passwordHash = passwordHashingService.HashPassword(record.Password);
-            await userRepository.AddAsync(new User(record.Username, record.Email, passwordHash, record.Role), cancellationToken);
+            var existingUser = await userRepository.FindByUsernameAsync(record.Username, cancellationToken);
+            if (existingUser is not null)
+            {
+                if (existingUser.Role != record.Role || existingUser.Email != record.Email)
+                {
+                    userRepository.Remove(existingUser);
+                    var passwordHash = passwordHashingService.HashPassword(record.Password);
+                    await userRepository.AddAsync(new User(record.Username, record.Email, passwordHash, record.Role), cancellationToken);
+                }
+            }
+            else
+            {
+                var passwordHash = passwordHashingService.HashPassword(record.Password);
+                await userRepository.AddAsync(new User(record.Username, record.Email, passwordHash, record.Role), cancellationToken);
+            }
         }
     }
 
