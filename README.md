@@ -90,6 +90,37 @@ The `nexa-platform` repository houses the planned ASP.NET Core backend service l
 
 ---
 
+## Authentication & Demo Credentials
+
+The IAM context manages B2B user authentication. The preferred sign-in payload accepts an `email` property, while the `username` property remains supported for backward compatibility:
+
+* **Endpoint**: `POST /api/v1/authentication/sign-in`
+* **Preferred Payload**:
+  ```json
+  {
+    "email": "sales@nexa.com",
+    "password": "NexaDemo2026!"
+  }
+  ```
+* **Backward Compatible Payload**:
+  ```json
+  {
+    "username": "sales@nexa.com",
+    "password": "NexaDemo2026!"
+  }
+  ```
+
+### Valid Demo Credentials
+
+The seed data registers the following B2B workspace users with the password `NexaDemo2026!`:
+
+* **Logistics Coordinator**: `logistics@nexa.com`
+* **Sales Representative**: `sales@nexa.com`
+* **Buyer Demo**: `buyer.demo@nexa.com`
+* **Admin (Technical Testing)**: `admin@nexa.com`
+
+---
+
 ## Repository Structure
 
 ```text
