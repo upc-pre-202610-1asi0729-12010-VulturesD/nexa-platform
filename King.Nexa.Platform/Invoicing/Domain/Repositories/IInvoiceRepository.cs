@@ -7,4 +7,8 @@ namespace King.Nexa.Platform.Invoicing.Domain.Repositories;
 public interface IInvoiceRepository : IBaseRepository<Invoice>
 {
     Task<Invoice?> FindByInvoiceNumberAsync(InvoiceNumber invoiceNumber, CancellationToken cancellationToken = default);
+
+    Task<IEnumerable<Invoice>> ListByOrderIdAsync(int orderId, CancellationToken cancellationToken = default);
+
+    Task<IEnumerable<Invoice>> ListByPaymentStatusAsync(PaymentStatus paymentStatus, CancellationToken cancellationToken = default);
 }

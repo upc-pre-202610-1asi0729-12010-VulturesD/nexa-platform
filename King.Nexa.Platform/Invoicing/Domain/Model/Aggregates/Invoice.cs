@@ -30,8 +30,27 @@ public class Invoice : AuditableEntity
 
     public DateTimeOffset? PaidAt { get; private set; }
 
+    public void Update(UpdateInvoiceCommand command)
+    {
+        if (PaymentStatus == PaymentStatus.Paid) throw new InvalidOperationException("Paid invoices cannot be updated.");
+        if (PaymentStatus == PaymentStatus.Cancelled) throw new InvalidOperationException("Cancelled invoices cannot be updated.");
+
+        InvoiceNumber = command.InvoiceNumber;
+        OrderId = command.OrderId;
+        BillingAmount = command.BillingAmount;
+    }
+
+    public void Cancel()
+    {
+        if (PaymentStatus == PaymentStatus.Paid) throw new InvalidOperationException("Paid invoices cannot be cancelled.");
+
+        PaymentStatus = PaymentStatus.Cancelled;
+    }
+
     public void MarkPaid()
     {
+        if (PaymentStatus == PaymentStatus.Cancelled) throw new InvalidOperationException("Cancelled invoices cannot be paid.");
+
         PaymentStatus = PaymentStatus.Paid;
         PaidAt = DateTimeOffset.UtcNow;
     }

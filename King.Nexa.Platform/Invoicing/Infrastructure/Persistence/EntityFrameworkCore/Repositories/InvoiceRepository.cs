@@ -11,4 +11,10 @@ public class InvoiceRepository(AppDbContext context) : BaseRepository<Invoice>(c
 {
     public async Task<Invoice?> FindByInvoiceNumberAsync(InvoiceNumber invoiceNumber, CancellationToken cancellationToken = default) =>
         await Context.Invoices.FirstOrDefaultAsync(invoice => invoice.InvoiceNumber == invoiceNumber, cancellationToken);
+
+    public async Task<IEnumerable<Invoice>> ListByOrderIdAsync(int orderId, CancellationToken cancellationToken = default) =>
+        await Context.Invoices.Where(invoice => invoice.OrderId == orderId).ToListAsync(cancellationToken);
+
+    public async Task<IEnumerable<Invoice>> ListByPaymentStatusAsync(PaymentStatus paymentStatus, CancellationToken cancellationToken = default) =>
+        await Context.Invoices.Where(invoice => invoice.PaymentStatus == paymentStatus).ToListAsync(cancellationToken);
 }
