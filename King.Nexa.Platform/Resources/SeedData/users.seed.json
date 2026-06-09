@@ -1,0 +1,26 @@
+[
+  {
+    "username": "admin@nexa.com",
+    "email": "admin@nexa.com",
+    "password": "NexaDemo2026!",
+    "role": "Admin"
+  },
+  {
+    "username": "logistics@nexa.com",
+    "email": "logistics@nexa.com",
+    "password": "NexaDemo2026!",
+    "role": "Logistics"
+  },
+  {
+    "username": "sales@nexa.com",
+    "email": "sales@nexa.com",
+    "password": "NexaDemo2026!",
+    "role": "Sales"
+  },
+  {
+    "username": "buyer.demo@nexa.com",
+    "email": "buyer.demo@nexa.com",
+    "password": "NexaDemo2026!",
+    "role": "Buyer"
+  }
+]
