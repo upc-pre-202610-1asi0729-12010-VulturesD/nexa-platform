@@ -4,6 +4,91 @@ Scope: inventory and plan only. No endpoints implemented in this pass.
 
 Current routing note: controllers using `[Route("api/v1/[controller]")]` are transformed by `KebabCaseRouteNamingConvention`, so `CatalogItemsController` exposes `api/v1/catalog-items`, `InventoryItemsController` exposes `api/v1/inventory-items`, and so on.
 
+## Batch 2 Implementation Update
+
+Previous real endpoint count before Batch 2: 48.
+
+Batch 2 added simple resources only:
+
+| Bounded context | Resource | Endpoints added |
+|---|---|---:|
+| CatalogManagement | Categories | 6 |
+| CatalogManagement | Brands | 6 |
+| Warehouse | Warehouses | 6 |
+| Invoicing | Payments | 7 |
+| Total | Batch 2 | 25 |
+
+Final estimated endpoint count after Batch 2: 73.
+
+Batch 2 endpoints added:
+
+| Bounded context | Controller | Method | Route |
+|---|---|---:|---|
+| CatalogManagement | CategoriesController | GET | `/api/v1/categories` |
+| CatalogManagement | CategoriesController | GET | `/api/v1/categories/{id:int}` |
+| CatalogManagement | CategoriesController | GET | `/api/v1/categories/by-name/{name}` |
+| CatalogManagement | CategoriesController | POST | `/api/v1/categories` |
+| CatalogManagement | CategoriesController | PUT | `/api/v1/categories/{id:int}` |
+| CatalogManagement | CategoriesController | DELETE | `/api/v1/categories/{id:int}` |
+| CatalogManagement | BrandsController | GET | `/api/v1/brands` |
+| CatalogManagement | BrandsController | GET | `/api/v1/brands/{id:int}` |
+| CatalogManagement | BrandsController | GET | `/api/v1/brands/by-name/{name}` |
+| CatalogManagement | BrandsController | POST | `/api/v1/brands` |
+| CatalogManagement | BrandsController | PUT | `/api/v1/brands/{id:int}` |
+| CatalogManagement | BrandsController | DELETE | `/api/v1/brands/{id:int}` |
+| Warehouse | WarehousesController | GET | `/api/v1/warehouses` |
+| Warehouse | WarehousesController | GET | `/api/v1/warehouses/{id:int}` |
+| Warehouse | WarehousesController | GET | `/api/v1/warehouses/by-location/{location}` |
+| Warehouse | WarehousesController | POST | `/api/v1/warehouses` |
+| Warehouse | WarehousesController | PUT | `/api/v1/warehouses/{id:int}` |
+| Warehouse | WarehousesController | DELETE | `/api/v1/warehouses/{id:int}` |
+| Invoicing | PaymentsController | GET | `/api/v1/payments` |
+| Invoicing | PaymentsController | GET | `/api/v1/payments/{id:int}` |
+| Invoicing | PaymentsController | GET | `/api/v1/payments/by-invoice/{invoiceId:int}` |
+| Invoicing | PaymentsController | GET | `/api/v1/payments/by-status/{status}` |
+| Invoicing | PaymentsController | POST | `/api/v1/payments` |
+| Invoicing | PaymentsController | PUT | `/api/v1/payments/{id:int}` |
+| Invoicing | PaymentsController | DELETE | `/api/v1/payments/{id:int}` |
+
+Batch 2 files created:
+
+| Area | Files |
+|---|---|
+| CatalogManagement domain | `Category`, `Brand`, create/update/delete commands, list/id/name queries, `ICategoryRepository`, `IBrandRepository` |
+| CatalogManagement application | category/brand command and query service interfaces plus internal implementations |
+| CatalogManagement infrastructure | category/brand EF repositories, DI registrations, EF model configuration |
+| CatalogManagement REST | `CategoriesController`, `BrandsController`, category/brand resources and assemblers |
+| Warehouse domain | `Warehouse`, `WarehouseName`, create/update/delete commands, list/id/location queries, `IWarehouseRepository` |
+| Warehouse application | warehouse command and query service interfaces plus internal implementations |
+| Warehouse infrastructure | warehouse EF repository, DI registrations, EF model configuration |
+| Warehouse REST | `WarehousesController`, warehouse resources and assemblers |
+| Invoicing domain | `Payment`, register/update/delete commands, list/id/invoice/status queries, `IPaymentRepository` |
+| Invoicing application | payment command and query service interfaces plus internal implementations |
+| Invoicing infrastructure | payment EF repository, DI registrations, EF model configuration |
+| Invoicing REST | `PaymentsController`, payment resources and assemblers |
+
+Batch 2 files modified:
+
+| File | Reason |
+|---|---|
+| `Shared/Infrastructure/Persistence/EntityFrameworkCore/Configuration/AppDbContext.cs` | Added DbSets for categories, brands, warehouses, payments. |
+| `CatalogManagement/Infrastructure/DependencyInjection/CatalogManagementServiceCollectionExtensions.cs` | Registered category and brand repositories/services. |
+| `CatalogManagement/Infrastructure/Persistence/EntityFrameworkCore/Configuration/Extensions/ModelBuilderExtensions.cs` | Added category and brand table configuration. |
+| `Warehouse/Infrastructure/DependencyInjection/WarehouseServiceCollectionExtensions.cs` | Registered warehouse repository/services. |
+| `Warehouse/Infrastructure/Persistence/EntityFrameworkCore/Configuration/Extensions/ModelBuilderExtensions.cs` | Added warehouse table configuration. |
+| `Invoicing/Infrastructure/DependencyInjection/InvoicingServiceCollectionExtensions.cs` | Registered payment repository/services. |
+| `Invoicing/Infrastructure/Persistence/EntityFrameworkCore/Configuration/Extensions/ModelBuilderExtensions.cs` | Added payment table configuration. |
+
+Pending risks:
+
+- Local SDK is .NET `8.0.421`; restore/build for `net10.0` remains blocked until .NET 10 SDK is installed.
+- EF Core schema now includes four new tables; migration must be generated after build tooling is available.
+- Payment confirmation remains future Batch 3 work; Batch 2 only registers, updates, filters, and cancels payments.
+
+Next recommended batch:
+
+- Batch 3: domain-specific actions and integration cleanup, especially payment confirmation, shipment tracking events, delivery routes, and inventory movements.
+
 ## Current Endpoint Count
 
 | Controller | Bounded context | Count |
