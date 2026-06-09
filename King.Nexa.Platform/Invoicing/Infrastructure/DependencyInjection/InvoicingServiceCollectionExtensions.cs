@@ -14,6 +14,9 @@ public static class InvoicingServiceCollectionExtensions
         services.AddScoped<IInvoiceRepository, InvoiceRepository>();
         services.AddScoped<IInvoiceCommandService, InvoiceCommandService>();
         services.AddScoped<IInvoiceQueryService, InvoiceQueryService>();
+        services.AddScoped<IPaymentRepository, PaymentRepository>();
+        services.AddScoped<IPaymentCommandService, PaymentCommandService>();
+        services.AddScoped<IPaymentQueryService, PaymentQueryService>();
 
         return services;
     }
