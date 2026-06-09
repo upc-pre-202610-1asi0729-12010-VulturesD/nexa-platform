@@ -10,4 +10,8 @@ public interface IInventoryItemQueryService
     Task<InventoryItem?> Handle(GetInventoryItemByIdQuery query, CancellationToken cancellationToken = default);
 
     Task<InventoryItem?> Handle(GetInventoryItemByCatalogItemIdQuery query, CancellationToken cancellationToken = default);
+
+    Task<IEnumerable<InventoryItem>> Handle(GetInventoryItemsByWarehouseLocationQuery query, CancellationToken cancellationToken = default);
+
+    Task<IEnumerable<InventoryItem>> Handle(GetLowStockInventoryItemsQuery query, CancellationToken cancellationToken = default);
 }

@@ -17,4 +17,10 @@ public class InventoryItemQueryService(IInventoryItemRepository inventoryItemRep
 
     public async Task<InventoryItem?> Handle(GetInventoryItemByCatalogItemIdQuery query, CancellationToken cancellationToken = default) =>
         await inventoryItemRepository.FindByCatalogItemIdAsync(new CatalogItemId(query.CatalogItemId), cancellationToken);
+
+    public async Task<IEnumerable<InventoryItem>> Handle(GetInventoryItemsByWarehouseLocationQuery query, CancellationToken cancellationToken = default) =>
+        await inventoryItemRepository.ListByWarehouseLocationAsync(new WarehouseLocation(query.WarehouseLocation), cancellationToken);
+
+    public async Task<IEnumerable<InventoryItem>> Handle(GetLowStockInventoryItemsQuery query, CancellationToken cancellationToken = default) =>
+        await inventoryItemRepository.ListLowStockAsync(query.Threshold, cancellationToken);
 }
