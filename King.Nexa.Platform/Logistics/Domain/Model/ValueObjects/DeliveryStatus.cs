@@ -4,5 +4,6 @@ public enum DeliveryStatus
 {
     Scheduled,
     InTransit,
-    Delivered
+    Delivered,
+    Cancelled
 }

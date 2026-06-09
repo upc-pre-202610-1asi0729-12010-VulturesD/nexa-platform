@@ -17,6 +17,17 @@ public class ShipmentCommandService(IShipmentRepository shipmentRepository, IUni
         return shipment;
     }
 
+    public async Task<Shipment?> RescheduleAsync(RescheduleShipmentCommand command, CancellationToken cancellationToken = default)
+    {
+        var shipment = await shipmentRepository.FindByIdAsync(command.ShipmentId, cancellationToken);
+        if (shipment is null) return null;
+
+        shipment.Reschedule(command);
+        shipmentRepository.Update(shipment);
+        await unitOfWork.CompleteAsync(cancellationToken);
+        return shipment;
+    }
+
     public async Task<Shipment?> MarkDeliveredAsync(MarkShipmentDeliveredCommand command, CancellationToken cancellationToken = default)
     {
         var shipment = await shipmentRepository.FindByIdAsync(command.ShipmentId, cancellationToken);
@@ -26,5 +37,16 @@ public class ShipmentCommandService(IShipmentRepository shipmentRepository, IUni
         shipmentRepository.Update(shipment);
         await unitOfWork.CompleteAsync(cancellationToken);
         return shipment;
+    }
+
+    public async Task<bool> CancelAsync(CancelShipmentCommand command, CancellationToken cancellationToken = default)
+    {
+        var shipment = await shipmentRepository.FindByIdAsync(command.ShipmentId, cancellationToken);
+        if (shipment is null) return false;
+
+        shipment.Cancel();
+        shipmentRepository.Update(shipment);
+        await unitOfWork.CompleteAsync(cancellationToken);
+        return true;
     }
 }

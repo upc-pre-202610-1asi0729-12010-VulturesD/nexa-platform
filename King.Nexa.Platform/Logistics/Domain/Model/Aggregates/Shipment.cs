@@ -33,8 +33,25 @@ public class Shipment : AuditableEntity
 
     public void RegisterTemperature(decimal celsius) => LastTemperatureRecord = new TemperatureRecord(celsius);
 
+    public void Reschedule(RescheduleShipmentCommand command)
+    {
+        if (Status == DeliveryStatus.Delivered) throw new InvalidOperationException("Delivered shipments cannot be rescheduled.");
+        if (Status == DeliveryStatus.Cancelled) throw new InvalidOperationException("Cancelled shipments cannot be rescheduled.");
+
+        ScheduledAt = command.ScheduledAt;
+    }
+
+    public void Cancel()
+    {
+        if (Status == DeliveryStatus.Delivered) throw new InvalidOperationException("Delivered shipments cannot be cancelled.");
+
+        Status = DeliveryStatus.Cancelled;
+    }
+
     public void MarkDelivered()
     {
+        if (Status == DeliveryStatus.Cancelled) throw new InvalidOperationException("Cancelled shipments cannot be delivered.");
+
         Status = DeliveryStatus.Delivered;
         DeliveredAt = DateTimeOffset.UtcNow;
     }
