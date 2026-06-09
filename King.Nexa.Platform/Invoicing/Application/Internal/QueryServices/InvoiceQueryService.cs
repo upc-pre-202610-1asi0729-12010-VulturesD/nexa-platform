@@ -13,4 +13,10 @@ public class InvoiceQueryService(IInvoiceRepository invoiceRepository) : IInvoic
 
     public async Task<Invoice?> Handle(GetInvoiceByIdQuery query, CancellationToken cancellationToken = default) =>
         await invoiceRepository.FindByIdAsync(query.InvoiceId, cancellationToken);
+
+    public async Task<IEnumerable<Invoice>> Handle(GetInvoicesByOrderIdQuery query, CancellationToken cancellationToken = default) =>
+        await invoiceRepository.ListByOrderIdAsync(query.OrderId, cancellationToken);
+
+    public async Task<IEnumerable<Invoice>> Handle(GetInvoicesByPaymentStatusQuery query, CancellationToken cancellationToken = default) =>
+        await invoiceRepository.ListByPaymentStatusAsync(query.PaymentStatus, cancellationToken);
 }
