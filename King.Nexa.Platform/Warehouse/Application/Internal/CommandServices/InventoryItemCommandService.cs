@@ -17,6 +17,27 @@ public class InventoryItemCommandService(IInventoryItemRepository inventoryItemR
         return item;
     }
 
+    public async Task<InventoryItem?> UpdateAsync(UpdateInventoryItemCommand command, CancellationToken cancellationToken = default)
+    {
+        var item = await inventoryItemRepository.FindByIdAsync(command.InventoryItemId, cancellationToken);
+        if (item is null) return null;
+
+        item.Update(command);
+        inventoryItemRepository.Update(item);
+        await unitOfWork.CompleteAsync(cancellationToken);
+        return item;
+    }
+
+    public async Task<bool> DeleteAsync(DeleteInventoryItemCommand command, CancellationToken cancellationToken = default)
+    {
+        var item = await inventoryItemRepository.FindByIdAsync(command.InventoryItemId, cancellationToken);
+        if (item is null) return false;
+
+        inventoryItemRepository.Remove(item);
+        await unitOfWork.CompleteAsync(cancellationToken);
+        return true;
+    }
+
     public async Task<InventoryItem?> ReserveAsync(ReserveInventoryCommand command, CancellationToken cancellationToken = default)
     {
         var item = await inventoryItemRepository.FindByIdAsync(command.InventoryItemId, cancellationToken);
