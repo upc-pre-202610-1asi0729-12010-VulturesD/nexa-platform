@@ -13,4 +13,10 @@ public class ShipmentQueryService(IShipmentRepository shipmentRepository) : IShi
 
     public async Task<Shipment?> Handle(GetShipmentByIdQuery query, CancellationToken cancellationToken = default) =>
         await shipmentRepository.FindByIdAsync(query.ShipmentId, cancellationToken);
+
+    public async Task<IEnumerable<Shipment>> Handle(GetShipmentsByOrderIdQuery query, CancellationToken cancellationToken = default) =>
+        await shipmentRepository.ListByOrderIdAsync(query.OrderId, cancellationToken);
+
+    public async Task<IEnumerable<Shipment>> Handle(GetShipmentsByStatusQuery query, CancellationToken cancellationToken = default) =>
+        await shipmentRepository.ListByStatusAsync(query.Status, cancellationToken);
 }
