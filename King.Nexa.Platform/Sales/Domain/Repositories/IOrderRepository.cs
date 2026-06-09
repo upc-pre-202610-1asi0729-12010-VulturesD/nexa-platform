@@ -11,4 +11,8 @@ public interface IOrderRepository : IBaseRepository<Order>
     Task<Order?> FindByIdWithItemsAsync(int id, CancellationToken cancellationToken = default);
 
     Task<IEnumerable<Order>> ListWithItemsAsync(CancellationToken cancellationToken = default);
+
+    Task<IEnumerable<Order>> ListByCustomerIdAsync(CustomerId customerId, CancellationToken cancellationToken = default);
+
+    Task<IEnumerable<Order>> ListByStatusAsync(OrderStatus status, CancellationToken cancellationToken = default);
 }

@@ -10,11 +10,17 @@ namespace King.Nexa.Platform.Sales.Infrastructure.Persistence.EntityFrameworkCor
 public class OrderRepository(AppDbContext context) : BaseRepository<Order>(context), IOrderRepository
 {
     public async Task<Order?> FindByOrderNumberAsync(OrderNumber orderNumber, CancellationToken cancellationToken = default) =>
-        await Context.Orders.FirstOrDefaultAsync(order => order.OrderNumber == orderNumber, cancellationToken);
+        await Context.Orders.Include(order => order.Items).FirstOrDefaultAsync(order => order.OrderNumber == orderNumber, cancellationToken);
 
     public async Task<Order?> FindByIdWithItemsAsync(int id, CancellationToken cancellationToken = default) =>
         await Context.Orders.Include(order => order.Items).FirstOrDefaultAsync(order => order.Id == id, cancellationToken);
 
     public async Task<IEnumerable<Order>> ListWithItemsAsync(CancellationToken cancellationToken = default) =>
         await Context.Orders.Include(order => order.Items).ToListAsync(cancellationToken);
+
+    public async Task<IEnumerable<Order>> ListByCustomerIdAsync(CustomerId customerId, CancellationToken cancellationToken = default) =>
+        await Context.Orders.Include(order => order.Items).Where(order => order.CustomerId == customerId).ToListAsync(cancellationToken);
+
+    public async Task<IEnumerable<Order>> ListByStatusAsync(OrderStatus status, CancellationToken cancellationToken = default) =>
+        await Context.Orders.Include(order => order.Items).Where(order => order.Status == status).ToListAsync(cancellationToken);
 }
