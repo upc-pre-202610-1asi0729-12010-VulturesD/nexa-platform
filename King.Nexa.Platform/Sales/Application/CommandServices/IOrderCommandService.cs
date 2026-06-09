@@ -7,6 +7,8 @@ public interface IOrderCommandService
 {
     Task<Order> CreateAsync(CreateOrderCommand command, CancellationToken cancellationToken = default);
 
+    Task<Order?> UpdateAsync(UpdateOrderCommand command, CancellationToken cancellationToken = default);
+
     Task<Order?> ConfirmAsync(ConfirmOrderCommand command, CancellationToken cancellationToken = default);
 
     Task<Order?> RejectAsync(RejectOrderCommand command, CancellationToken cancellationToken = default);

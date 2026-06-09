@@ -17,6 +17,17 @@ public class OrderCommandService(IOrderRepository orderRepository, IUnitOfWork u
         return order;
     }
 
+    public async Task<Order?> UpdateAsync(UpdateOrderCommand command, CancellationToken cancellationToken = default)
+    {
+        var order = await orderRepository.FindByIdWithItemsAsync(command.OrderId, cancellationToken);
+        if (order is null) return null;
+
+        order.Update(command);
+        orderRepository.Update(order);
+        await unitOfWork.CompleteAsync(cancellationToken);
+        return order;
+    }
+
     public async Task<Order?> ConfirmAsync(ConfirmOrderCommand command, CancellationToken cancellationToken = default)
     {
         var order = await orderRepository.FindByIdAsync(command.OrderId, cancellationToken);
