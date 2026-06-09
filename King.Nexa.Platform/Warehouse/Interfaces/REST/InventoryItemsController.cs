@@ -44,6 +44,26 @@ public class InventoryItemsController(IInventoryItemCommandService inventoryItem
     }
 
     /// <summary>
+    /// Gets inventory items by warehouse location.
+    /// </summary>
+    [HttpGet("by-warehouse-location/{warehouseLocation}")]
+    public async Task<IActionResult> GetInventoryItemsByWarehouseLocation(string warehouseLocation, CancellationToken cancellationToken)
+    {
+        var items = await inventoryItemQueryService.Handle(new GetInventoryItemsByWarehouseLocationQuery(warehouseLocation), cancellationToken);
+        return Ok(items.Select(InventoryItemResourceFromEntityAssembler.ToResourceFromEntity));
+    }
+
+    /// <summary>
+    /// Gets inventory items whose available quantity is at or below the threshold.
+    /// </summary>
+    [HttpGet("low-stock/{threshold:int}")]
+    public async Task<IActionResult> GetLowStockInventoryItems(int threshold, CancellationToken cancellationToken)
+    {
+        var items = await inventoryItemQueryService.Handle(new GetLowStockInventoryItemsQuery(threshold), cancellationToken);
+        return Ok(items.Select(InventoryItemResourceFromEntityAssembler.ToResourceFromEntity));
+    }
+
+    /// <summary>
     /// Creates an inventory item.
     /// </summary>
     [HttpPost]
@@ -52,6 +72,27 @@ public class InventoryItemsController(IInventoryItemCommandService inventoryItem
         var command = CreateInventoryItemCommandFromResourceAssembler.ToCommandFromResource(resource);
         var item = await inventoryItemCommandService.CreateAsync(command, cancellationToken);
         return CreatedAtAction(nameof(GetInventoryItemById), new { id = item.Id }, InventoryItemResourceFromEntityAssembler.ToResourceFromEntity(item));
+    }
+
+    /// <summary>
+    /// Updates an inventory item.
+    /// </summary>
+    [HttpPut("{id:int}")]
+    public async Task<IActionResult> UpdateInventoryItem(int id, UpdateInventoryItemResource resource, CancellationToken cancellationToken)
+    {
+        var command = UpdateInventoryItemCommandFromResourceAssembler.ToCommandFromResource(id, resource);
+        var item = await inventoryItemCommandService.UpdateAsync(command, cancellationToken);
+        return item is null ? NotFound() : Ok(InventoryItemResourceFromEntityAssembler.ToResourceFromEntity(item));
+    }
+
+    /// <summary>
+    /// Deletes an inventory item.
+    /// </summary>
+    [HttpDelete("{id:int}")]
+    public async Task<IActionResult> DeleteInventoryItem(int id, CancellationToken cancellationToken)
+    {
+        var deleted = await inventoryItemCommandService.DeleteAsync(new DeleteInventoryItemCommand(id), cancellationToken);
+        return deleted ? NoContent() : NotFound();
     }
 
     /// <summary>

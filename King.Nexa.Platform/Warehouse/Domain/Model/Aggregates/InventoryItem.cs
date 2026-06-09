@@ -41,6 +41,15 @@ public class InventoryItem : AuditableEntity
 
     public TemperatureRange TemperatureRange { get; private set; }
 
+    public void Update(UpdateInventoryItemCommand command)
+    {
+        ProductId = command.ProductId;
+        CatalogItemId = command.CatalogItemId;
+        AvailableQuantity = command.AvailableQuantity;
+        WarehouseLocation = command.WarehouseLocation;
+        TemperatureRange = command.TemperatureRange;
+    }
+
     public void Reserve(InventoryReservation reservation)
     {
         if (reservation.Units > AvailableQuantity.Value)
