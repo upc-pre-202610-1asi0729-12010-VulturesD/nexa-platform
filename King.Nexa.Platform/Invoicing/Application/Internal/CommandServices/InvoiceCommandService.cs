@@ -17,6 +17,17 @@ public class InvoiceCommandService(IInvoiceRepository invoiceRepository, IUnitOf
         return invoice;
     }
 
+    public async Task<Invoice?> UpdateAsync(UpdateInvoiceCommand command, CancellationToken cancellationToken = default)
+    {
+        var invoice = await invoiceRepository.FindByIdAsync(command.InvoiceId, cancellationToken);
+        if (invoice is null) return null;
+
+        invoice.Update(command);
+        invoiceRepository.Update(invoice);
+        await unitOfWork.CompleteAsync(cancellationToken);
+        return invoice;
+    }
+
     public async Task<Invoice?> MarkPaidAsync(MarkInvoicePaidCommand command, CancellationToken cancellationToken = default)
     {
         var invoice = await invoiceRepository.FindByIdAsync(command.InvoiceId, cancellationToken);
@@ -26,5 +37,16 @@ public class InvoiceCommandService(IInvoiceRepository invoiceRepository, IUnitOf
         invoiceRepository.Update(invoice);
         await unitOfWork.CompleteAsync(cancellationToken);
         return invoice;
+    }
+
+    public async Task<bool> CancelAsync(CancelInvoiceCommand command, CancellationToken cancellationToken = default)
+    {
+        var invoice = await invoiceRepository.FindByIdAsync(command.InvoiceId, cancellationToken);
+        if (invoice is null) return false;
+
+        invoice.Cancel();
+        invoiceRepository.Update(invoice);
+        await unitOfWork.CompleteAsync(cancellationToken);
+        return true;
     }
 }
