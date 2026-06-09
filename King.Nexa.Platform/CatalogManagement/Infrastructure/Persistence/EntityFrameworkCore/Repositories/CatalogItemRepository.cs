@@ -11,4 +11,13 @@ public class CatalogItemRepository(AppDbContext context) : BaseRepository<Catalo
 {
     public async Task<CatalogItem?> FindByCatalogItemIdAsync(CatalogItemId catalogItemId, CancellationToken cancellationToken = default) =>
         await Context.CatalogItems.FirstOrDefaultAsync(catalogItem => catalogItem.CatalogItemId == catalogItemId, cancellationToken);
+
+    public async Task<IEnumerable<CatalogItem>> ListByCategoryNameAsync(CategoryName categoryName, CancellationToken cancellationToken = default) =>
+        await Context.CatalogItems.Where(catalogItem => catalogItem.CategoryName == categoryName).ToListAsync(cancellationToken);
+
+    public async Task<IEnumerable<CatalogItem>> ListByBrandNameAsync(BrandName brandName, CancellationToken cancellationToken = default) =>
+        await Context.CatalogItems.Where(catalogItem => catalogItem.BrandName == brandName).ToListAsync(cancellationToken);
+
+    public async Task<IEnumerable<CatalogItem>> ListByColdChainRequirementAsync(ColdChainRequirement coldChainRequirement, CancellationToken cancellationToken = default) =>
+        await Context.CatalogItems.Where(catalogItem => catalogItem.ColdChainRequirement == coldChainRequirement).ToListAsync(cancellationToken);
 }
