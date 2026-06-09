@@ -22,4 +22,26 @@ public class CatalogItemCommandService(ICatalogItemRepository catalogItemReposit
         await unitOfWork.CompleteAsync(cancellationToken);
         return catalogItem;
     }
+
+    public async Task<CatalogItem?> UpdateAsync(UpdateCatalogItemCommand command, CancellationToken cancellationToken = default)
+    {
+        var catalogItem = await catalogItemRepository.FindByIdAsync(command.Id, cancellationToken);
+        if (catalogItem is null) return null;
+
+        catalogItem.Update(command);
+        catalogItemRepository.Update(catalogItem);
+        await unitOfWork.CompleteAsync(cancellationToken);
+        return catalogItem;
+    }
+
+    public async Task<bool> DeleteAsync(DeleteCatalogItemCommand command, CancellationToken cancellationToken = default)
+    {
+        var catalogItem = await catalogItemRepository.FindByIdAsync(command.CatalogItemId, cancellationToken);
+        if (catalogItem is null) return false;
+
+        catalogItem.Deactivate();
+        catalogItemRepository.Update(catalogItem);
+        await unitOfWork.CompleteAsync(cancellationToken);
+        return true;
+    }
 }

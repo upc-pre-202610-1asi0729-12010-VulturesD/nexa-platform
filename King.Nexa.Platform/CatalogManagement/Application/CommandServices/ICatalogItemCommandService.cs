@@ -12,4 +12,8 @@ public interface ICatalogItemCommandService
     /// Creates a new catalog item from the supplied command.
     /// </summary>
     Task<CatalogItem> CreateAsync(CreateCatalogItemCommand command, CancellationToken cancellationToken = default);
+
+    Task<CatalogItem?> UpdateAsync(UpdateCatalogItemCommand command, CancellationToken cancellationToken = default);
+
+    Task<bool> DeleteAsync(DeleteCatalogItemCommand command, CancellationToken cancellationToken = default);
 }
