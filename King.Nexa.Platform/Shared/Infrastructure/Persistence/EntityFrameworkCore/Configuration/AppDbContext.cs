@@ -13,6 +13,7 @@ using King.Nexa.Platform.Shared.Infrastructure.Persistence.EntityFrameworkCore.C
 using King.Nexa.Platform.Warehouse.Domain.Model.Aggregates;
 using King.Nexa.Platform.Warehouse.Infrastructure.Persistence.EntityFrameworkCore.Configuration.Extensions;
 using Microsoft.EntityFrameworkCore;
+using WarehouseAggregate = King.Nexa.Platform.Warehouse.Domain.Model.Aggregates.Warehouse;
 
 namespace King.Nexa.Platform.Shared.Infrastructure.Persistence.EntityFrameworkCore.Configuration;
 
@@ -20,15 +21,23 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
 {
     public DbSet<CatalogItem> CatalogItems => Set<CatalogItem>();
 
+    public DbSet<Category> Categories => Set<Category>();
+
+    public DbSet<Brand> Brands => Set<Brand>();
+
     public DbSet<Order> Orders => Set<Order>();
 
     public DbSet<OrderItem> OrderItems => Set<OrderItem>();
 
     public DbSet<InventoryItem> InventoryItems => Set<InventoryItem>();
 
+    public DbSet<WarehouseAggregate> Warehouses => Set<WarehouseAggregate>();
+
     public DbSet<Shipment> Shipments => Set<Shipment>();
 
     public DbSet<Invoice> Invoices => Set<Invoice>();
+
+    public DbSet<Payment> Payments => Set<Payment>();
 
     public DbSet<User> Users => Set<User>();
 
