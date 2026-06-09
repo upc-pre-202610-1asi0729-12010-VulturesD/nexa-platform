@@ -8,4 +8,10 @@ public interface IOrderQueryService
     Task<IEnumerable<Order>> Handle(GetAllOrdersQuery query, CancellationToken cancellationToken = default);
 
     Task<Order?> Handle(GetOrderByIdQuery query, CancellationToken cancellationToken = default);
+
+    Task<Order?> Handle(GetOrderByOrderNumberQuery query, CancellationToken cancellationToken = default);
+
+    Task<IEnumerable<Order>> Handle(GetOrdersByCustomerIdQuery query, CancellationToken cancellationToken = default);
+
+    Task<IEnumerable<Order>> Handle(GetOrdersByStatusQuery query, CancellationToken cancellationToken = default);
 }

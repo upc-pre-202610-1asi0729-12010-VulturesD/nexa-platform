@@ -47,6 +47,19 @@ public class Order : AuditableEntity
 
     public List<OrderItem> Items { get; private set; } = [];
 
+    public void Update(UpdateOrderCommand command)
+    {
+        if (Status != OrderStatus.Pending)
+            throw new InvalidOperationException("Only pending orders can be updated.");
+        if (command.Items.Count == 0)
+            throw new ArgumentException("An order must contain at least one item.", nameof(command));
+
+        CustomerId = command.CustomerId;
+        Items.Clear();
+        Items.AddRange(command.Items.Select(item => new OrderItem(item)));
+        Total = CalculateTotal(Items);
+    }
+
     public void Confirm(PaymentConfirmation paymentConfirmation, InventoryReservation inventoryReservation)
     {
         if (Status == OrderStatus.Cancelled) throw new InvalidOperationException("Cancelled orders cannot be confirmed.");
