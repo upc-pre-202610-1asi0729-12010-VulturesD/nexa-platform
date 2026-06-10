@@ -1,0 +1,3 @@
+namespace King.Nexa.Platform.Invoicing.Domain.Model.Commands;
+
+public record MarkInvoicePaidCommand(int InvoiceId);
