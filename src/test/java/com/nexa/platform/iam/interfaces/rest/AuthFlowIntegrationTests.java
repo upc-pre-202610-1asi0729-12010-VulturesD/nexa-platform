@@ -21,10 +21,10 @@ class AuthFlowIntegrationTests {
 
     @Test
     void registerReturnsBearerToken() throws Exception {
-        String body = "{\"fullName\":\"Warehouse Operator\",\"email\":\"operator@nexa.local\",\"password\":\"Operator123\"}";
+        String body = "{\"fullName\":\"Warehouse Operator\",\"email\":\"operator.flow@nexa.local\",\"password\":\"Operator123\"}";
         mockMvc.perform(post("/api/v1/auth/register").contentType(MediaType.APPLICATION_JSON).content(body))
             .andExpect(status().isCreated())
             .andExpect(jsonPath("$.tokenType").value("Bearer"))
-            .andExpect(jsonPath("$.user.email").value("operator@nexa.local"));
+            .andExpect(jsonPath("$.user.email").value("operator.flow@nexa.local"));
     }
 }
