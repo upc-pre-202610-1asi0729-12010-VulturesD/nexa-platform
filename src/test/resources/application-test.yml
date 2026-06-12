@@ -8,6 +8,9 @@ spring:
     hibernate:
       ddl-auto: create-drop
     open-in-view: false
+    properties:
+      hibernate:
+        physical_naming_strategy: com.nexa.platform.shared.infrastructure.persistence.jpa.strategy.SnakeCasePhysicalNamingStrategy
   h2:
     console:
       enabled: false

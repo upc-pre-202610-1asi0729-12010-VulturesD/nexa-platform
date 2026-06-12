@@ -12,3 +12,4 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
         format_sql: true
+        physical_naming_strategy: com.nexa.platform.shared.infrastructure.persistence.jpa.strategy.SnakeCasePhysicalNamingStrategy
