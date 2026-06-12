@@ -10,7 +10,13 @@ import org.springframework.stereotype.Component;
 public class CatalogMapper {
     public ProductResponse toProductResponse(Product product) {
         ColdChainRequirement req = product.getColdChainRequirement();
-        return new ProductResponse(product.getId(), product.getSku(), product.getName(), product.getDescription(), product.getCategory().getName(), product.getSupplierName(), product.getUnitPrice(), req.getMinCelsius(), req.getMaxCelsius(), req.getHandlingNotes(), product.isActive());
+        Integer minCelsius = req == null ? null : req.getMinCelsius();
+        Integer maxCelsius = req == null ? null : req.getMaxCelsius();
+        String handlingNotes = req == null ? null : req.getHandlingNotes();
+        return new ProductResponse(product.getId(), product.getSku(), product.getSku(), product.getName(), product.getDescription(),
+            product.getCategory().getName(), product.getSupplierName(), product.getSupplierName(), product.getUnitPrice(),
+            product.getUnit(), minCelsius, maxCelsius, handlingNotes, product.getImageUrl(),
+            product.isActive() ? "AVAILABLE" : "INACTIVE", product.isActive());
     }
     public CategoryResponse toCategoryResponse(Category category) {
         return new CategoryResponse(category.getId(), category.getName(), category.getDescription());

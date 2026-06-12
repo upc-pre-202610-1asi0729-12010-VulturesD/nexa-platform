@@ -1,9 +1,12 @@
-package com.nexa.platform.catalog.application.dtos;
+package com.nexa.platform.catalog.interfaces.rest.resources;
 
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import java.math.BigDecimal;
 
-public record ProductRequest(
+public record CreateProductResource(
     @NotBlank @Size(max = 40) String sku,
     @NotBlank @Size(max = 140) String name,
     @Size(max = 360) String description,
