@@ -4,10 +4,12 @@ using King.Nexa.Platform.Invoicing.Infrastructure.DependencyInjection;
 using King.Nexa.Platform.Logistics.Infrastructure.DependencyInjection;
 using King.Nexa.Platform.Sales.Infrastructure.DependencyInjection;
 using King.Nexa.Platform.Shared.Infrastructure.DependencyInjection;
+using King.Nexa.Platform.Shared.Infrastructure.Persistence.EntityFrameworkCore.Configuration;
 using King.Nexa.Platform.Shared.Infrastructure.Interfaces.AspNetCore.Configuration;
 using King.Nexa.Platform.Shared.Infrastructure.Pipeline.Middleware.Extensions;
 using King.Nexa.Platform.Shared.Infrastructure.Seed;
 using King.Nexa.Platform.Warehouse.Infrastructure.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -52,16 +54,37 @@ builder.Services.AddSwaggerGen(options =>
 
 var app = builder.Build();
 
+// Configure Database Context and route EF logs through the app logger pipeline.
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var logger = services.GetRequiredService<ILogger<Program>>();
+
+    try
+    {
+        var context = services.GetRequiredService<AppDbContext>();
+        await context.Database.MigrateAsync();
+        logger.LogInformation("Database migrations applied successfully.");
+
+        if (app.Environment.IsDevelopment())
+        {
+            var seedDataService = services.GetRequiredService<ISeedDataService>();
+            await seedDataService.SeedAsync();
+        }
+    }
+    catch (Exception ex)
+    {
+        logger.LogError(ex, "An error occurred while applying database migrations.");
+        throw;
+    }
+}
+
 app.UseGlobalExceptionHandling();
 
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-
-    using var scope = app.Services.CreateScope();
-    var seedDataService = scope.ServiceProvider.GetRequiredService<ISeedDataService>();
-    await seedDataService.SeedAsync();
 }
 
 app.UseHttpsRedirection();
