@@ -12,9 +12,9 @@
 
 <br/>
 
-![.NET Core](https://img.shields.io/badge/.NET%20Core-8.0-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
-![C#](https://img.shields.io/badge/C%23-12-239120?style=for-the-badge&logo=c-sharp&logoColor=white)
-![EF Core](https://img.shields.io/badge/EF%20Core-8.0-512BD4?style=for-the-badge)
+![.NET Core](https://img.shields.io/badge/.NET%20Core-10.0-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
+![C#](https://img.shields.io/badge/C%23-14-239120?style=for-the-badge&logo=c-sharp&logoColor=white)
+![EF Core](https://img.shields.io/badge/EF%20Core-9.0-512BD4?style=for-the-badge)
 ![REST API](https://img.shields.io/badge/REST%20API-domain-0EA5E9?style=for-the-badge)
 
 <br/>
@@ -39,7 +39,7 @@
 
 The `nexa-platform` repository houses the planned ASP.NET Core backend service layer for the Nexa platform. It establishes a modular monolith foundation with bounded contexts, domain invariants, MySQL persistence structures, and REST API controllers to support catalog, order, inventory, route, and invoice workflows.
 
-**Current stable backend version:** `v0.3.0`
+**Current stable backend version:** `v0.6.1`
 
 > [!NOTE]
 > This repository represents a local backend foundation and architecture skeleton. Complete integration with the public website or web application is planned for future platform milestones.
