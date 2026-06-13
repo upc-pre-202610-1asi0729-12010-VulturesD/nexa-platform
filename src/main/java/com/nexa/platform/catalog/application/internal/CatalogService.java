@@ -22,7 +22,7 @@ public class CatalogService implements CatalogCommandService, CatalogQueryServic
         this.products = products; this.categories = categories; this.mapper = mapper;
     }
 
-    public List<ProductResponse> listProducts() { return products.findByActiveTrueOrderByNameAsc().stream().map(mapper::toProductResponse).toList(); }
+    public List<ProductResponse> listProducts() { return products.findByActiveTrueOrderByIdAsc().stream().map(mapper::toProductResponse).toList(); }
     public ProductResponse getProduct(Long id) { return mapper.toProductResponse(products.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product", id))); }
     public List<CategoryResponse> listCategories() { return categories.findAll().stream().map(mapper::toCategoryResponse).toList(); }
 
