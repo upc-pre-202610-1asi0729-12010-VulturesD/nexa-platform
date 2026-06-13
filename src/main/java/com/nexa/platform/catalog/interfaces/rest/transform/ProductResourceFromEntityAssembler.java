@@ -10,6 +10,14 @@ public final class ProductResourceFromEntityAssembler {
         return new ProductResource(response.id(), response.sku(), response.productCode(), response.name(),
             response.description(), response.category(), response.supplierName(), response.brandName(), response.unitPrice(),
             response.unit(), response.minCelsius(), response.maxCelsius(), response.handlingNotes(), response.imageUrl(),
-            response.status(), response.active());
+            response.status(), response.active(), response.brandName(), response.unitPrice(), response.status(), response.availableStock(),
+            temperatureRange(response), response.productCode(), response.productCode(), response.name(), response.category(),
+            response.unitPrice(), "PEN", response.availableStock(), response.reservedStock(), response.minStock(),
+            response.handlingNotes(), response.active());
+    }
+
+    private static String temperatureRange(ProductResponse response) {
+        if (response.minCelsius() == null || response.maxCelsius() == null) return null;
+        return response.minCelsius() + "C - " + response.maxCelsius() + "C";
     }
 }

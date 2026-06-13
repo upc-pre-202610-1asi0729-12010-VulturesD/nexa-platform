@@ -18,5 +18,21 @@ public record ProductResource(
     String handlingNotes,
     String imageUrl,
     String status,
-    boolean active
+    boolean active,
+    String brand,
+    BigDecimal price,
+    String availability,
+    Integer stock,
+    String temperatureRange,
+    String catalogItemId,
+    String productId,
+    String itemName,
+    String categoryName,
+    BigDecimal unitPriceAmount,
+    String unitPriceCurrency,
+    Integer availableStock,
+    Integer reservedStock,
+    Integer minStock,
+    String coldChainRequirement,
+    Boolean isActive
 ) { }

@@ -16,6 +16,7 @@ public class CatalogMapper {
         return new ProductResponse(product.getId(), product.getSku(), product.getSku(), product.getName(), product.getDescription(),
             product.getCategory().getName(), product.getSupplierName(), product.getSupplierName(), product.getUnitPrice(),
             product.getUnit(), minCelsius, maxCelsius, handlingNotes, product.getImageUrl(),
+            product.getAvailableStock(), product.getReservedStock(), product.getMinStock(),
             product.isActive() ? "AVAILABLE" : "INACTIVE", product.isActive());
     }
     public CategoryResponse toCategoryResponse(Category category) {
