@@ -23,7 +23,7 @@ The schema is generated from Spring Data JPA mappings during academic verificati
 | IAM | `iam_roles` | `id`, `name` | `id` | none | unique role name | yes |
 | IAM | `iam_user_roles` | `user_id`, `role_id` | composite | user, role | user-role join | yes |
 | Catalog | `catalog_categories` | `id`, `name`, `description` | `id` | none | unique `name` | yes |
-| Catalog | `catalog_products` | `id`, `sku`, `name`, `description`, `category_id`, `supplier_name`, `unit_price`, `unit`, `image_url`, `min_celsius`, `max_celsius`, `handling_notes`, `active` | `id` | category | unique `sku`, indexed `sku` | yes |
+| Catalog | `catalog_products` | `id`, `sku`, `name`, `description`, `category_id`, `supplier_name`, `unit_price`, `unit`, `image_url`, `available_stock`, `reserved_stock`, `min_stock`, `min_celsius`, `max_celsius`, `handling_notes`, `active` | `id` | category | unique `sku`, indexed `sku` | yes |
 | Warehouse | `warehouse_warehouses` | `id`, `name`, `address`, `temperature_band` | `id` | none | required name and temperature band | yes |
 | Warehouse | `warehouse_inventory_items` | `id`, `warehouse_id`, `product_id`, `quantity_available`, `reorder_point` | `id` | warehouse, product | required quantity and reorder point | yes |
 | Warehouse | `warehouse_stock_batches` | `id`, `inventory_item_id`, `lot_code`, `expires_on`, `quantity` | `id` | inventory item | lot and expiration tracking | partial |
@@ -57,9 +57,9 @@ The schema is generated from Spring Data JPA mappings during academic verificati
 
 Local and test profiles seed:
 
-- Admin, operator, and buyer demo users.
-- Catalog categories for charcuterie, cheeses, and butter/dairy.
-- Source-aligned catalog products with image URLs under `/assets/catalog-items`.
+- Admin, operator, source commercial, source logistics, warehouse, and source buyer demo users.
+- Catalog categories for Cheese, Charcuterie, Butter, and Dessert.
+- 50 source-aligned catalog products from `src/main/resources/data/catalog-items.json` with image URLs under `/assets/catalog-items`.
 - One cold hub warehouse, inventory stock for the primary catalog item, one B2B customer, and one logistics route.
 
 ## Catalog Image URL Strategy
