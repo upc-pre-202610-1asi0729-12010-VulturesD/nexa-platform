@@ -71,7 +71,7 @@ http://localhost:8080/swagger-ui/index.html
 | Area | Endpoints |
 |---|---|
 | IAM | `POST /api/v1/auth/register`, `POST /api/v1/auth/login`, `GET /api/v1/users/me` |
-| Catalog | `GET /api/v1/products`, `POST /api/v1/products`, `GET /api/v1/categories` |
+| Catalog | `GET /api/v1/catalog-items`, `GET /api/v1/products`, `POST /api/v1/products`, `GET /api/v1/categories` |
 | Warehouse | `GET /api/v1/warehouses`, `GET /api/v1/inventory`, `POST /api/v1/inventory/movements`, `GET /api/v1/inventory/alerts` |
 | Sales | `GET /api/v1/customers`, `POST /api/v1/orders`, `GET /api/v1/orders`, `PATCH /api/v1/orders/{id}/status` |
 | Logistics | `POST /api/v1/shipments`, `GET /api/v1/shipments`, `GET /api/v1/shipments/{id}/tracking`, `POST /api/v1/driver-checklists` |

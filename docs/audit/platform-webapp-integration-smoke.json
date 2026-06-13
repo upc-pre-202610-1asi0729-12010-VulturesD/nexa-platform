@@ -1,0 +1,182 @@
+{
+  "generatedAt": "2026-06-13T01:32:03.428Z",
+  "platformBaseUrl": "http://localhost:8080/api/v1",
+  "webappUrl": "http://localhost:4200",
+  "valeria": {
+    "url": "http://localhost:4200/dashboard",
+    "user": {
+      "email": "sales@nexa.com",
+      "name": "Valeria Sanchez",
+      "roleKey": "commercial",
+      "scope": "ops",
+      "clientId": null
+    }
+  },
+  "catalog": {
+    "url": "http://localhost:4200/products",
+    "count": 50,
+    "firstCards": [
+      "QUESO GRANA PADANO DOP 150GPROD-0001Refrigerado2°C - 8°CDisponibleMarca: AgriformS/ 17.30160 UN disp.",
+      "QUESO PARMIGIANO REGGIANO DOP 150GPROD-0002Refrigerado2°C - 8°CDisponibleMarca: AgriformS/ 20.50160 UN disp.",
+      "COPPA MOLDE 3KGPROD-0003Refrigerado2°C - 8°CDisponibleMarca: CavourS/ 390.0036 UN disp.",
+      "MORTADELLA BOLOGNA IGP CON PISTACCHIO MOLDE 7.5KGPROD-0004Refrigerado2°C - 8°CDisponibleMarca: CavourS/ 690.0024 UN disp."
+    ],
+    "hasSourceFirstProduct": true
+  },
+  "roberto": {
+    "url": "http://localhost:4200/dashboard",
+    "user": {
+      "email": "logistics@nexa.com",
+      "name": "Roberto Garcia",
+      "roleKey": "logistics",
+      "scope": "ops",
+      "clientId": null
+    }
+  },
+  "logistics": {
+    "url": "http://localhost:4200/inventory",
+    "roleTextPresent": false
+  },
+  "elena": {
+    "url": "http://localhost:4200/portal/home",
+    "user": {
+      "email": "buyer.demo@nexa.com",
+      "name": "Elena Litano",
+      "roleKey": "buyer",
+      "scope": "portal",
+      "clientId": "CLI-001"
+    }
+  },
+  "portal": {
+    "url": "http://localhost:4200/portal/home",
+    "hasBuyerName": true
+  },
+  "apiHits": [
+    {
+      "url": "http://localhost:8080/api/v1/auth/login",
+      "status": 200
+    },
+    {
+      "url": "http://localhost:8080/api/v1/orders",
+      "status": 200
+    },
+    {
+      "url": "http://localhost:8080/api/v1/alerts",
+      "status": 403
+    },
+    {
+      "url": "http://localhost:8080/api/v1/activity-log",
+      "status": 403
+    },
+    {
+      "url": "http://localhost:8080/api/v1/orders",
+      "status": 200
+    },
+    {
+      "url": "http://localhost:8080/api/v1/products",
+      "status": 200
+    },
+    {
+      "url": "http://localhost:8080/api/v1/dispatches",
+      "status": 403
+    },
+    {
+      "url": "http://localhost:8080/api/v1/clients",
+      "status": 403
+    },
+    {
+      "url": "http://localhost:8080/api/v1/inventory-lots",
+      "status": 403
+    },
+    {
+      "url": "http://localhost:8080/api/v1/orders",
+      "status": 200
+    },
+    {
+      "url": "http://localhost:8080/api/v1/catalog-items",
+      "status": 200
+    },
+    {
+      "url": "http://localhost:8080/api/v1/categories",
+      "status": 200
+    },
+    {
+      "url": "http://localhost:8080/api/v1/auth/login",
+      "status": 200
+    },
+    {
+      "url": "http://localhost:8080/api/v1/orders",
+      "status": 200
+    },
+    {
+      "url": "http://localhost:8080/api/v1/alerts",
+      "status": 403
+    },
+    {
+      "url": "http://localhost:8080/api/v1/activity-log",
+      "status": 403
+    },
+    {
+      "url": "http://localhost:8080/api/v1/orders",
+      "status": 200
+    },
+    {
+      "url": "http://localhost:8080/api/v1/products",
+      "status": 200
+    },
+    {
+      "url": "http://localhost:8080/api/v1/dispatches",
+      "status": 403
+    },
+    {
+      "url": "http://localhost:8080/api/v1/clients",
+      "status": 403
+    },
+    {
+      "url": "http://localhost:8080/api/v1/inventory-lots",
+      "status": 403
+    },
+    {
+      "url": "http://localhost:8080/api/v1/orders",
+      "status": 200
+    },
+    {
+      "url": "http://localhost:8080/api/v1/products",
+      "status": 200
+    },
+    {
+      "url": "http://localhost:8080/api/v1/warehouses",
+      "status": 200
+    },
+    {
+      "url": "http://localhost:8080/api/v1/inventory-lots",
+      "status": 403
+    },
+    {
+      "url": "http://localhost:8080/api/v1/auth/login",
+      "status": 200
+    },
+    {
+      "url": "http://localhost:8080/api/v1/orders",
+      "status": 200
+    },
+    {
+      "url": "http://localhost:8080/api/v1/products",
+      "status": 200
+    },
+    {
+      "url": "http://localhost:8080/api/v1/clients",
+      "status": 403
+    }
+  ],
+  "assertions": {
+    "valeriaCommercial": true,
+    "catalogSourceCount": true,
+    "robertoLogistics": true,
+    "logisticsRouteAllowed": true,
+    "elenaPortal": true,
+    "portalNameVisible": true,
+    "platformAuthUsed": true,
+    "platformCatalogUsed": true
+  }
+}
