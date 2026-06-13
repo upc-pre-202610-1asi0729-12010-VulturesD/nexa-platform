@@ -21,4 +21,12 @@ class SwaggerSmokeTests {
     void apiDocsArePublic() throws Exception {
         mockMvc.perform(get("/v3/api-docs")).andExpect(status().isOk());
     }
+
+    @Test
+    void apiDocsListWebAppContractEndpoints() throws Exception {
+        mockMvc.perform(get("/v3/api-docs"))
+            .andExpect(status().isOk())
+            .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.content().string(org.hamcrest.Matchers.containsString("/api/v1/catalog-items")))
+            .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.content().string(org.hamcrest.Matchers.containsString("/api/v1/auth/login")));
+    }
 }
