@@ -8,13 +8,14 @@
 
 # nexa-platform
 
-**Planned backend service layer and API foundation for the Nexa B2B platform**
+**Backend platform and API service layer for the Nexa B2B cold-chain distribution platform**
 
 <br/>
 
 ![.NET Core](https://img.shields.io/badge/.NET%20Core-10.0-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
 ![C#](https://img.shields.io/badge/C%23-14-239120?style=for-the-badge&logo=c-sharp&logoColor=white)
 ![EF Core](https://img.shields.io/badge/EF%20Core-9.0-512BD4?style=for-the-badge)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-336791?style=for-the-badge&logo=postgresql&logoColor=white)
 ![REST API](https://img.shields.io/badge/REST%20API-domain-0EA5E9?style=for-the-badge)
 
 <br/>
@@ -23,7 +24,7 @@
 ![Cycle](https://img.shields.io/badge/Cycle-2026--10-0a2540?style=flat-square)
 ![University](https://img.shields.io/badge/University-UPC-0a2540?style=flat-square)
 ![Team](https://img.shields.io/badge/Team-King-2a67d9?style=flat-square)
-![Status](https://img.shields.io/badge/Status-Backend%20Foundation-0f766e?style=flat-square)
+![Status](https://img.shields.io/badge/Status-Release%201.0.0-22c55e?style=flat-square)
 
 <br/>
 
@@ -37,148 +38,180 @@
 
 ## Overview
 
-The `nexa-platform` repository houses the planned ASP.NET Core backend service layer for the Nexa platform. It establishes a modular monolith foundation with bounded contexts, domain invariants, MySQL persistence structures, and REST API controllers to support catalog, order, inventory, route, and invoice workflows.
-
-**Current stable backend version:** `v0.6.1`
-
-> [!NOTE]
-> This repository represents a local backend foundation and architecture skeleton. Complete integration with the public website or web application is planned for future platform milestones.
+The `nexa-platform` repository houses the ASP.NET Core backend service layer for the Nexa platform. Built using Clean Architecture and Domain-Driven Design (DDD) principles, it exposes modular REST APIs organized across multiple bounded contexts to manage catalog, inventory, order, logistics routing, and invoice workflows.
 
 ---
 
-## Nexa Repository Hub
+## Repository Map
 
 <table>
   <tr>
     <td width="50%">
-      <strong>Live Website</strong><br />
-      Public landing page and product entry point.<br />
-      <a href="https://upc-pre-202610-1asi0730-12242-king.github.io/nexa-website/">Open website</a>
+      <p><a href="https://github.com/upc-pre-202610-1asi0730-12242-king/nexa-website">nexa-website</a></p>
+      <p>Public landing website and central product entry point.</p>
+      <p><a href="https://upc-pre-202610-1asi0730-12242-king.github.io/nexa-website/">Open Live Website</a></p>
+      <p>
+        <img alt="HTML5" src="https://img.shields.io/badge/HTML5-static-E34F26?style=flat-square&logo=html5&logoColor=white" />
+        <img alt="CSS3" src="https://img.shields.io/badge/CSS3-responsive-1572B6?style=flat-square&logo=css3&logoColor=white" />
+        <img alt="JavaScript" src="https://img.shields.io/badge/JavaScript-vanilla-F7DF1E?style=flat-square&logo=javascript&logoColor=black" />
+      </p>
     </td>
     <td width="50%">
-      <strong>WebApp</strong><br />
-      Operational frontend for product workflows.<br />
-      <a href="https://github.com/upc-pre-202610-1asi0730-12242-king/nexa-webapp">Open repository</a>
+      <p><a href="https://github.com/upc-pre-202610-1asi0730-12242-king/nexa-webapp">nexa-webapp</a></p>
+      <p>Main web application for operational workflows and buyer-facing coordination.</p>
+      <p><a href="https://nexa-webapp.onrender.com/#/auth/login">Open Live WebApp Login</a></p>
+      <p>
+        <img alt="Vue 3" src="https://img.shields.io/badge/Vue%203-35495E?style=flat-square&logo=vue.js&logoColor=4FC08D" />
+        <img alt="Vite" src="https://img.shields.io/badge/Vite-0F172A?style=flat-square&logo=vite&logoColor=FFD62E" />
+        <img alt="PrimeVue" src="https://img.shields.io/badge/PrimeVue-0EA5E9?style=flat-square" />
+      </p>
     </td>
   </tr>
   <tr>
     <td width="50%">
-      <strong>Platform</strong><br />
-      Backend/domain workspace and service foundation.<br />
-      <a href="https://github.com/upc-pre-202610-1asi0730-12242-king/nexa-platform">Open repository</a>
+      <p><a href="https://github.com/upc-pre-202610-1asi0730-12242-king/nexa-platform">nexa-platform</a> (This Repository)</p>
+      <p>Platform and backend work area for API, domain, and infrastructure concerns.</p>
+      <p><a href="https://github.com/upc-pre-202610-1asi0730-12242-king/nexa-platform/wiki">Open Engineering Wiki</a></p>
+      <p>
+        <img alt="Platform" src="https://img.shields.io/badge/Platform-backend%20workspace-512BD4?style=flat-square" />
+        <img alt="API" src="https://img.shields.io/badge/API-domain%20services-0EA5E9?style=flat-square" />
+        <img alt="EF Core" src="https://img.shields.io/badge/EF%20Core-9.0-512BD4?style=flat-square" />
+      </p>
     </td>
     <td width="50%">
-      <strong>Report</strong><br />
-      Academic report and project evidence.<br />
-      <a href="https://github.com/upc-pre-202610-1asi0730-12242-king/nexa-report">Open repository</a>
+      <p><a href="https://github.com/upc-pre-202610-1asi0730-12242-king/nexa-ecosystem-report">nexa-ecosystem-report</a></p>
+      <p>Academic report, product research, backlog, architecture documentation, and project evidence.</p>
+      <p><a href="https://github.com/upc-pre-202610-1asi0730-12242-king/nexa-ecosystem-report">Open Report Repository</a></p>
+      <p>
+        <img alt="Documentation" src="https://img.shields.io/badge/Documentation-report-0F172A?style=flat-square" />
+        <img alt="UPC" src="https://img.shields.io/badge/UPC-course%20evidence-0EA5E9?style=flat-square" />
+      </p>
     </td>
   </tr>
 </table>
 
 ---
 
-## Platform Scope
+## Application Areas
 
-| Domain Context | Managed Aggregate | Planned API Route | Focus Area |
-|---|---|---|---|
-| **Sales** | `Order` | `/api/v1/orders` | Managing B2B client order validation & queues. |
-| **Logistics** | `Shipment` | `/api/v1/shipments` | Delivery routes & logistics tracking. |
-| **Warehouse** | `InventoryItem` | `/api/v1/inventory-items` | Real stock, reservations, location & temperature monitoring. |
-| **Invoicing** | `Invoice` | `/api/v1/invoices` | Auto-generation of invoicing records. |
-| **Catalog Management** | `CatalogItem` | `/api/v1/catalog-items` | Published catalog items, pricing, categories & cold-chain requirements. |
-| **IAM** | `User` | `/api/v1/authentication/*` | Future authentication and access management boundary. |
-
----
-
-## Authentication & Demo Credentials
-
-The IAM context manages B2B user authentication. The preferred sign-in payload accepts an `email` property, while the `username` property remains supported for backward compatibility:
-
-* **Endpoint**: `POST /api/v1/authentication/sign-in`
-* **Preferred Payload**:
-  ```json
-  {
-    "email": "sales@nexa.com",
-    "password": "NexaDemo2026!"
-  }
-  ```
-* **Backward Compatible Payload**:
-  ```json
-  {
-    "username": "sales@nexa.com",
-    "password": "NexaDemo2026!"
-  }
-  ```
-
-### Valid Demo Credentials
-
-The seed data registers the following B2B workspace users with the password `NexaDemo2026!`:
-
-* **Logistics Coordinator**: `logistics@nexa.com`
-* **Sales Representative**: `sales@nexa.com`
-* **Buyer Demo**: `buyer.demo@nexa.com`
-* **Admin (Technical Testing)**: `admin@nexa.com`
+| Area | Backend Responsibility | Key Aggregates |
+|---|---|---|
+| **Sales** | Order creation, validation, pricing calculations, and confirmation status. | `Order` |
+| **Warehouse** | Real stock levels, reserved stock, temperature monitoring, and warehouse locations. | `InventoryItem`, `Warehouse` |
+| **Logistics** | Dispatch planning, logistics scheduling, delivery status updates, and route tracking. | `Shipment` |
+| **Invoicing** | Invoices billing, payments registration, billing reference tracking, and payment matching. | `Invoice`, `Payment` |
+| **Catalog Management** | Product descriptions, units price, stock quantity, brands, categories, and cold-chain requirements. | `CatalogItem`, `Brand`, `Category` |
+| **IAM** | User signup, sign-in, password security, session token generation. | `User` |
 
 ---
 
-## Repository Structure
+## Tech Stack
 
-```text
-nexa-platform/
-├── nexa-platform.sln           # C# Visual Studio solution file
-├── docs/                       # Architecture & context specifications
-│   ├── assets/                 # Branding logo files
-│   ├── architecture-notes.md
-│   ├── bounded-contexts.md
-│   └── platform-roadmap.md
-└── King.Nexa.Platform/         # Main ASP.NET Core project folder
-    ├── Program.cs              # Bootstrapper entry point
-    ├── appsettings.json        # Solution configs & database templates
-    ├── Resources/              # Shared and context i18n resources
-    ├── Migrations/             # EF migration target and MySQL init script
-    ├── Shared/                 # Shared Kernel domain base
-    ├── Sales/                  # Sales context domain layer
-    ├── Logistics/              # Logistics context domain layer
-    ├── Warehouse/              # Warehouse context domain layer
-    ├── Invoicing/              # Invoicing context domain layer
-    ├── CatalogManagement/      # Catalog context domain layer
-    └── Iam/                    # Identity access management boundary
-```
+| Layer | Technology |
+|---|---|
+| **Core Framework** | .NET Core 10.0 |
+| **Language** | C# 14 |
+| **Object-Relational Mapper** | Entity Framework Core 9.0 |
+| **Database** | PostgreSQL 16 |
+| **API Tooling & Docs** | Swagger / OpenAPI (Swashbuckle) |
+| **Architecture** | Clean Architecture & Domain-Driven Design (DDD) |
 
 ---
 
 ## Getting Started
 
 ### Local Setup
-Ensure you have the compatible .NET SDK installed on your machine.
 
-1. **Restore dependencies**:
-   ```bash
-   dotnet restore
-   ```
+1.  **Prerequisites**:
+    - Install the [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0).
+    - Install the [EF Core CLI tool](https://learn.microsoft.com/en-us/ef/core/cli/dotnet):
+      ```bash
+      dotnet tool install --global dotnet-ef
+      ```
+    - Ensure you have a local **PostgreSQL** instance running.
 
-2. **Build the solution**:
-   ```bash
-   dotnet build
-   ```
+2.  **Configuration**:
+    - Navigate to the project root directory.
+    - Create a local configuration file called `appsettings.Local.json` by copying the template:
+      ```bash
+      cp King.Nexa.Platform/appsettings.Local.example.json King.Nexa.Platform/appsettings.Local.json
+      ```
+    - Update `appsettings.Local.json` with your local PostgreSQL server connection details:
+      ```json
+      {
+        "ConnectionStrings": {
+          "DefaultConnection": "Host=localhost;Port=5432;Database=nexa_platform_db;Username=postgres;Password=your_password;SSL Mode=Prefer;Trust Server Certificate=true"
+        }
+      }
+      ```
+      *(Note: `appsettings.Local.json` is git-ignored to prevent database credential leaks).*
 
-3. **Start the API service**:
-   ```bash
-   dotnet run --project King.Nexa.Platform/King.Nexa.Platform.csproj
-   ```
-   *The application is configured for MySQL through Pomelo. For local development, create `nexa_platform_db` with `King.Nexa.Platform/Migrations/mysql-init.sql`, then use `King.Nexa.Platform/appsettings.Local.json` for machine-specific credentials. See `docs/database-setup.md` for the migration flow.*
+3.  **Run Migrations**:
+    Apply the database migrations to create the database schema:
+    ```bash
+    dotnet ef database update --project King.Nexa.Platform
+    ```
+
+4.  **Run the Server**:
+    Start the backend application:
+    ```bash
+    dotnet run --project King.Nexa.Platform
+    ```
+    *The API will start listening locally at `http://localhost:5068/` and the Swagger UI will be accessible at `http://localhost:5068/swagger`.*
 
 ---
 
-## Team
+## Available Commands
 
-| Member | Focus | GitHub Identity |
-|:---|:---|:---|
-| **Diego Yucra** | Bootstrapping, Sales domain & GitFlow | [DiegoS284](https://github.com/DiegoS284) |
-| **Gerard Rojas** | Shared Kernel, Persistence & Invoicing | [GerardRojasMancilla](https://github.com/GerardRojasMancilla) |
-| **César Marín** | Logistics context & Domain documentation | [Cmarin2802](https://github.com/Cmarin2802) |
-| **Gino Torrejón** | Catalog management context | [R0obxdnt-bit](https://github.com/R0obxdnt-bit) |
-| **Joaquín Verde** | Warehouse stock verification | [JoaquinVerde115](https://github.com/JoaquinVerde115) |
+| Command | Action |
+|---|---|
+| `dotnet restore` | Restores NuGet dependencies. |
+| `dotnet build` | Compiles the backend project. |
+| `dotnet run --project King.Nexa.Platform` | Starts the local API server. |
+| `dotnet ef database update --project King.Nexa.Platform` | Applies migrations to the database. |
+| `dotnet ef migrations add <Name> --project King.Nexa.Platform` | Creates a new EF migration. |
+
+---
+
+## Project Structure
+
+```text
+King.Nexa.Platform/
+├── CatalogManagement/   # Product catalog, categories, and brands boundary
+├── Iam/                 # Authentication, users, password hashing, and token boundary
+├── Invoicing/           # Invoices billing, payments registration boundary
+├── Logistics/           # Delivery route coordination and shipment boundary
+├── Sales/               # Commercial orders registration and validation boundary
+├── Shared/              # Shared kernel (generic bases, Unit of Work, exception handling)
+├── Warehouse/           # Inventory stock tracking, warehouses, reservations boundary
+├── Migrations/          # Entity Framework database schema migrations
+├── Resources/           # Localized XML resources (.resx)
+└── Program.cs           # Main entry point and MVC pipeline configuration
+```
+
+---
+
+## Team & Domain Ownership
+
+To keep development organized, specific contexts are assigned to primary owners:
+
+| Context | Owner | Support |
+|---|---|---|
+| **Sales** | DiegoS284 | Cmarin2802, R0obxdnt-bit |
+| **Logistics** | Cmarin2802 | DiegoS284, GerardRojasMancilla |
+| **Warehouse** | JoaquinVerde115 | R0obxdnt-bit, DiegoS284 |
+| **Invoicing** | GerardRojasMancilla | Cmarin2802, DiegoS284 |
+| **Catalog Management** | R0obxdnt-bit | JoaquinVerde115, DiegoS284 |
+
+---
+
+## Documentation
+
+Full backend specifications, database guides, and developer workflows are maintained in:
+- **[Nexa Platform Wiki Index](https://github.com/upc-pre-202610-1asi0730-12242-king/nexa-platform/wiki)**
+- [Backend Clean Architecture Guidelines](https://github.com/upc-pre-202610-1asi0730-12242-king/nexa-platform/wiki/Backend-Architecture)
+- [REST API Design Guidelines](https://github.com/upc-pre-202610-1asi0730-12242-king/nexa-platform/wiki/API-Design-Guidelines)
+- [Security Policy (SECURITY.md)](SECURITY.md)
 
 ---
 
