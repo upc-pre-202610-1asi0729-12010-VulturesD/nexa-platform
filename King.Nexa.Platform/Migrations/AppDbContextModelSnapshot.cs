@@ -3,8 +3,8 @@ using System;
 using King.Nexa.Platform.Shared.Infrastructure.Persistence.EntityFrameworkCore.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
@@ -18,41 +18,41 @@ namespace King.Nexa.Platform.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "9.0.16")
-                .HasAnnotation("Relational:MaxIdentifierLength", 64);
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("King.Nexa.Platform.CatalogManagement.Domain.Model.Aggregates.Brand", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(240)
-                        .HasColumnType("varchar(240)")
+                        .HasColumnType("character varying(240)")
                         .HasColumnName("description");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("boolean")
                         .HasColumnName("is_active");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(120)
-                        .HasColumnType("varchar(120)")
+                        .HasColumnType("character varying(120)")
                         .HasColumnName("name");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at");
 
                     b.HasKey("Id")
@@ -69,73 +69,73 @@ namespace King.Nexa.Platform.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int>("AvailableStock")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("available_stock");
 
                     b.Property<string>("BrandName")
                         .IsRequired()
                         .HasMaxLength(120)
-                        .HasColumnType("varchar(120)")
+                        .HasColumnType("character varying(120)")
                         .HasColumnName("brand_name");
 
                     b.Property<string>("CatalogItemId")
                         .IsRequired()
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("character varying(64)")
                         .HasColumnName("catalog_item_id");
 
                     b.Property<string>("CategoryName")
                         .IsRequired()
                         .HasMaxLength(80)
-                        .HasColumnType("varchar(80)")
+                        .HasColumnType("character varying(80)")
                         .HasColumnName("category_name");
 
                     b.Property<string>("ColdChainRequirement")
                         .IsRequired()
                         .HasMaxLength(32)
-                        .HasColumnType("varchar(32)")
+                        .HasColumnType("character varying(32)")
                         .HasColumnName("cold_chain_requirement");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(500)
-                        .HasColumnType("varchar(500)")
+                        .HasColumnType("character varying(500)")
                         .HasColumnName("description");
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasMaxLength(240)
-                        .HasColumnType("varchar(240)")
+                        .HasColumnType("character varying(240)")
                         .HasColumnName("image_url");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("boolean")
                         .HasColumnName("is_active");
 
                     b.Property<string>("ItemName")
                         .IsRequired()
                         .HasMaxLength(160)
-                        .HasColumnType("varchar(160)")
+                        .HasColumnType("character varying(160)")
                         .HasColumnName("item_name");
 
                     b.Property<string>("ProductId")
                         .IsRequired()
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("character varying(64)")
                         .HasColumnName("product_id");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at");
 
                     b.HasKey("Id")
@@ -152,33 +152,33 @@ namespace King.Nexa.Platform.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(240)
-                        .HasColumnType("varchar(240)")
+                        .HasColumnType("character varying(240)")
                         .HasColumnName("description");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("boolean")
                         .HasColumnName("is_active");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(80)
-                        .HasColumnType("varchar(80)")
+                        .HasColumnType("character varying(80)")
                         .HasColumnName("name");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at");
 
                     b.HasKey("Id")
@@ -195,41 +195,41 @@ namespace King.Nexa.Platform.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(160)
-                        .HasColumnType("varchar(160)")
+                        .HasColumnType("character varying(160)")
                         .HasColumnName("email");
 
                     b.Property<string>("PasswordHash")
                         .IsRequired()
                         .HasMaxLength(240)
-                        .HasColumnType("varchar(240)")
+                        .HasColumnType("character varying(240)")
                         .HasColumnName("password_hash");
 
                     b.Property<string>("Role")
                         .IsRequired()
                         .HasMaxLength(40)
-                        .HasColumnType("varchar(40)")
+                        .HasColumnType("character varying(40)")
                         .HasColumnName("role");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at");
 
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasMaxLength(80)
-                        .HasColumnType("varchar(80)")
+                        .HasColumnType("character varying(80)")
                         .HasColumnName("username");
 
                     b.HasKey("Id")
@@ -250,37 +250,37 @@ namespace King.Nexa.Platform.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");
 
                     b.Property<string>("InvoiceNumber")
                         .IsRequired()
                         .HasMaxLength(32)
-                        .HasColumnType("varchar(32)")
+                        .HasColumnType("character varying(32)")
                         .HasColumnName("invoice_number");
 
                     b.Property<int>("OrderId")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("order_id");
 
                     b.Property<DateTimeOffset?>("PaidAt")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("paid_at");
 
                     b.Property<string>("PaymentStatus")
                         .IsRequired()
                         .HasMaxLength(24)
-                        .HasColumnType("varchar(24)")
+                        .HasColumnType("character varying(24)")
                         .HasColumnName("payment_status");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at");
 
                     b.HasKey("Id")
@@ -297,33 +297,33 @@ namespace King.Nexa.Platform.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");
 
                     b.Property<int>("InvoiceId")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("invoice_id");
 
                     b.Property<string>("ReferenceCode")
                         .IsRequired()
                         .HasMaxLength(80)
-                        .HasColumnType("varchar(80)")
+                        .HasColumnType("character varying(80)")
                         .HasColumnName("reference_code");
 
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasMaxLength(24)
-                        .HasColumnType("varchar(24)")
+                        .HasColumnType("character varying(24)")
                         .HasColumnName("status");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at");
 
                     b.HasKey("Id")
@@ -340,41 +340,41 @@ namespace King.Nexa.Platform.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");
 
                     b.Property<DateTimeOffset?>("DeliveredAt")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("delivered_at");
 
                     b.Property<int>("OrderId")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("order_id");
 
                     b.Property<DateTimeOffset>("ScheduledAt")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("scheduled_at");
 
                     b.Property<string>("ShipmentCode")
                         .IsRequired()
                         .HasMaxLength(32)
-                        .HasColumnType("varchar(32)")
+                        .HasColumnType("character varying(32)")
                         .HasColumnName("shipment_code");
 
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasMaxLength(24)
-                        .HasColumnType("varchar(24)")
+                        .HasColumnType("character varying(24)")
                         .HasColumnName("status");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at");
 
                     b.HasKey("Id")
@@ -391,54 +391,54 @@ namespace King.Nexa.Platform.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTimeOffset?>("ConfirmedAt")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("confirmed_at");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");
 
                     b.Property<string>("CustomerId")
                         .IsRequired()
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("character varying(64)")
                         .HasColumnName("customer_id");
 
                     b.Property<string>("InventoryReservation")
                         .HasMaxLength(120)
-                        .HasColumnType("varchar(120)")
+                        .HasColumnType("character varying(120)")
                         .HasColumnName("inventory_reservation");
 
                     b.Property<string>("OrderNumber")
                         .IsRequired()
                         .HasMaxLength(32)
-                        .HasColumnType("varchar(32)")
+                        .HasColumnType("character varying(32)")
                         .HasColumnName("order_number");
 
                     b.Property<string>("PaymentConfirmation")
                         .HasMaxLength(120)
-                        .HasColumnType("varchar(120)")
+                        .HasColumnType("character varying(120)")
                         .HasColumnName("payment_confirmation");
 
                     b.Property<string>("RejectionReason")
                         .HasMaxLength(240)
-                        .HasColumnType("varchar(240)")
+                        .HasColumnType("character varying(240)")
                         .HasColumnName("rejection_reason");
 
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasMaxLength(24)
-                        .HasColumnType("varchar(24)")
+                        .HasColumnType("character varying(24)")
                         .HasColumnName("status");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at");
 
                     b.HasKey("Id")
@@ -455,35 +455,35 @@ namespace King.Nexa.Platform.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CatalogItemId")
                         .IsRequired()
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("character varying(64)")
                         .HasColumnName("catalog_item_id");
 
                     b.Property<string>("ItemName")
                         .IsRequired()
                         .HasMaxLength(160)
-                        .HasColumnType("varchar(160)")
+                        .HasColumnType("character varying(160)")
                         .HasColumnName("item_name");
 
                     b.Property<int>("OrderId")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("order_id");
 
                     b.Property<string>("ProductId")
                         .IsRequired()
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("character varying(64)")
                         .HasColumnName("product_id");
 
                     b.Property<int>("Quantity")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("quantity");
 
                     b.HasKey("Id")
@@ -499,43 +499,43 @@ namespace King.Nexa.Platform.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int>("AvailableQuantity")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("available_quantity");
 
                     b.Property<string>("CatalogItemId")
                         .IsRequired()
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("character varying(64)")
                         .HasColumnName("catalog_item_id");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");
 
                     b.Property<string>("ProductId")
                         .IsRequired()
                         .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("character varying(64)")
                         .HasColumnName("product_id");
 
                     b.Property<int>("ReservedQuantity")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("reserved_quantity");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at");
 
                     b.Property<string>("WarehouseLocation")
                         .IsRequired()
                         .HasMaxLength(120)
-                        .HasColumnType("varchar(120)")
+                        .HasColumnType("character varying(120)")
                         .HasColumnName("warehouse_location");
 
                     b.HasKey("Id")
@@ -552,33 +552,33 @@ namespace King.Nexa.Platform.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("boolean")
                         .HasColumnName("is_active");
 
                     b.Property<string>("Location")
                         .IsRequired()
                         .HasMaxLength(120)
-                        .HasColumnType("varchar(120)")
+                        .HasColumnType("character varying(120)")
                         .HasColumnName("location");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(120)
-                        .HasColumnType("varchar(120)")
+                        .HasColumnType("character varying(120)")
                         .HasColumnName("name");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at");
 
                     b.HasKey("Id")
@@ -596,17 +596,17 @@ namespace King.Nexa.Platform.Migrations
                     b.OwnsOne("King.Nexa.Platform.CatalogManagement.Domain.Model.ValueObjects.Money", "UnitPrice", b1 =>
                         {
                             b1.Property<int>("CatalogItemId")
-                                .HasColumnType("int");
+                                .HasColumnType("integer");
 
                             b1.Property<decimal>("Amount")
                                 .HasPrecision(12, 2)
-                                .HasColumnType("decimal(12,2)")
+                                .HasColumnType("numeric(12,2)")
                                 .HasColumnName("unit_price_amount");
 
                             b1.Property<string>("Currency")
                                 .IsRequired()
                                 .HasMaxLength(3)
-                                .HasColumnType("varchar(3)")
+                                .HasColumnType("character varying(3)")
                                 .HasColumnName("unit_price_currency");
 
                             b1.HasKey("CatalogItemId");
@@ -626,17 +626,17 @@ namespace King.Nexa.Platform.Migrations
                     b.OwnsOne("King.Nexa.Platform.Invoicing.Domain.Model.ValueObjects.BillingAmount", "BillingAmount", b1 =>
                         {
                             b1.Property<int>("InvoiceId")
-                                .HasColumnType("int");
+                                .HasColumnType("integer");
 
                             b1.Property<decimal>("Amount")
                                 .HasPrecision(12, 2)
-                                .HasColumnType("decimal(12,2)")
+                                .HasColumnType("numeric(12,2)")
                                 .HasColumnName("amount");
 
                             b1.Property<string>("Currency")
                                 .IsRequired()
                                 .HasMaxLength(3)
-                                .HasColumnType("varchar(3)")
+                                .HasColumnType("character varying(3)")
                                 .HasColumnName("currency");
 
                             b1.HasKey("InvoiceId");
@@ -656,17 +656,17 @@ namespace King.Nexa.Platform.Migrations
                     b.OwnsOne("King.Nexa.Platform.Invoicing.Domain.Model.ValueObjects.BillingAmount", "BillingAmount", b1 =>
                         {
                             b1.Property<int>("PaymentId")
-                                .HasColumnType("int");
+                                .HasColumnType("integer");
 
                             b1.Property<decimal>("Amount")
                                 .HasPrecision(12, 2)
-                                .HasColumnType("decimal(12,2)")
+                                .HasColumnType("numeric(12,2)")
                                 .HasColumnName("amount");
 
                             b1.Property<string>("Currency")
                                 .IsRequired()
                                 .HasMaxLength(3)
-                                .HasColumnType("varchar(3)")
+                                .HasColumnType("character varying(3)")
                                 .HasColumnName("currency");
 
                             b1.HasKey("PaymentId");
@@ -686,15 +686,15 @@ namespace King.Nexa.Platform.Migrations
                     b.OwnsOne("King.Nexa.Platform.Logistics.Domain.Model.ValueObjects.TemperatureRecord", "LastTemperatureRecord", b1 =>
                         {
                             b1.Property<int>("ShipmentId")
-                                .HasColumnType("int");
+                                .HasColumnType("integer");
 
                             b1.Property<decimal>("Celsius")
                                 .HasPrecision(5, 2)
-                                .HasColumnType("decimal(5,2)")
+                                .HasColumnType("numeric(5,2)")
                                 .HasColumnName("last_temperature_celsius");
 
                             b1.Property<DateTimeOffset>("RecordedAt")
-                                .HasColumnType("datetime(6)")
+                                .HasColumnType("timestamp with time zone")
                                 .HasColumnName("last_temperature_recorded_at");
 
                             b1.HasKey("ShipmentId");
@@ -713,17 +713,17 @@ namespace King.Nexa.Platform.Migrations
                     b.OwnsOne("King.Nexa.Platform.Sales.Domain.Model.ValueObjects.Money", "Total", b1 =>
                         {
                             b1.Property<int>("OrderId")
-                                .HasColumnType("int");
+                                .HasColumnType("integer");
 
                             b1.Property<decimal>("Amount")
                                 .HasPrecision(12, 2)
-                                .HasColumnType("decimal(12,2)")
+                                .HasColumnType("numeric(12,2)")
                                 .HasColumnName("total_amount");
 
                             b1.Property<string>("Currency")
                                 .IsRequired()
                                 .HasMaxLength(3)
-                                .HasColumnType("varchar(3)")
+                                .HasColumnType("character varying(3)")
                                 .HasColumnName("total_currency");
 
                             b1.HasKey("OrderId");
@@ -750,17 +750,17 @@ namespace King.Nexa.Platform.Migrations
                     b.OwnsOne("King.Nexa.Platform.Sales.Domain.Model.ValueObjects.Money", "Subtotal", b1 =>
                         {
                             b1.Property<int>("OrderItemId")
-                                .HasColumnType("int");
+                                .HasColumnType("integer");
 
                             b1.Property<decimal>("Amount")
                                 .HasPrecision(12, 2)
-                                .HasColumnType("decimal(12,2)")
+                                .HasColumnType("numeric(12,2)")
                                 .HasColumnName("subtotal_amount");
 
                             b1.Property<string>("Currency")
                                 .IsRequired()
                                 .HasMaxLength(3)
-                                .HasColumnType("varchar(3)")
+                                .HasColumnType("character varying(3)")
                                 .HasColumnName("subtotal_currency");
 
                             b1.HasKey("OrderItemId");
@@ -774,17 +774,17 @@ namespace King.Nexa.Platform.Migrations
                     b.OwnsOne("King.Nexa.Platform.Sales.Domain.Model.ValueObjects.Money", "UnitPrice", b1 =>
                         {
                             b1.Property<int>("OrderItemId")
-                                .HasColumnType("int");
+                                .HasColumnType("integer");
 
                             b1.Property<decimal>("Amount")
                                 .HasPrecision(12, 2)
-                                .HasColumnType("decimal(12,2)")
+                                .HasColumnType("numeric(12,2)")
                                 .HasColumnName("unit_price_amount");
 
                             b1.Property<string>("Currency")
                                 .IsRequired()
                                 .HasMaxLength(3)
-                                .HasColumnType("varchar(3)")
+                                .HasColumnType("character varying(3)")
                                 .HasColumnName("unit_price_currency");
 
                             b1.HasKey("OrderItemId");
@@ -807,16 +807,16 @@ namespace King.Nexa.Platform.Migrations
                     b.OwnsOne("King.Nexa.Platform.Warehouse.Domain.Model.ValueObjects.TemperatureRange", "TemperatureRange", b1 =>
                         {
                             b1.Property<int>("InventoryItemId")
-                                .HasColumnType("int");
+                                .HasColumnType("integer");
 
                             b1.Property<decimal>("MaximumTemperature")
                                 .HasPrecision(6, 2)
-                                .HasColumnType("decimal(6,2)")
+                                .HasColumnType("numeric(6,2)")
                                 .HasColumnName("maximum_temperature");
 
                             b1.Property<decimal>("MinimumTemperature")
                                 .HasPrecision(6, 2)
-                                .HasColumnType("decimal(6,2)")
+                                .HasColumnType("numeric(6,2)")
                                 .HasColumnName("minimum_temperature");
 
                             b1.HasKey("InventoryItemId");
@@ -836,16 +836,16 @@ namespace King.Nexa.Platform.Migrations
                     b.OwnsOne("King.Nexa.Platform.Warehouse.Domain.Model.ValueObjects.TemperatureRange", "TemperatureRange", b1 =>
                         {
                             b1.Property<int>("WarehouseId")
-                                .HasColumnType("int");
+                                .HasColumnType("integer");
 
                             b1.Property<decimal>("MaximumTemperature")
                                 .HasPrecision(6, 2)
-                                .HasColumnType("decimal(6,2)")
+                                .HasColumnType("numeric(6,2)")
                                 .HasColumnName("maximum_temperature");
 
                             b1.Property<decimal>("MinimumTemperature")
                                 .HasPrecision(6, 2)
-                                .HasColumnType("decimal(6,2)")
+                                .HasColumnType("numeric(6,2)")
                                 .HasColumnName("minimum_temperature");
 
                             b1.HasKey("WarehouseId");
