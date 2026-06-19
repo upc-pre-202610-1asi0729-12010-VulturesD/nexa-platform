@@ -66,16 +66,16 @@ public class DevDataInitializer {
             if (routes.findAll().isEmpty()) routes.save(new DeliveryRoute("Lima Norte cold route", "Lima Cold Hub", "Los Olivos distribution zone"));
 
             if (promotions.findAll().isEmpty()) {
-                promotions.save(new Promotion("PROMO-COLD-001", "Chilled cheese rotation", 
-                    "Commercial bundle for selected cheese lines with short route windows.", 
+                promotions.save(new Promotion("PROMO-COLD-001", "Chilled cheese rotation",
+                    "Commercial bundle for selected cheese lines with short route windows.",
                     "8% commercial adjustment", "buyer_portal", "active", "Subject to stock and credit validation.",
                     List.of("PROD-0013", "PROD-0014")));
-                promotions.save(new Promotion("PROMO-COLD-002", "Food service charcuterie pack", 
-                    "Bundle support for hotels and restaurants with recurring weekly demand.", 
+                promotions.save(new Promotion("PROMO-COLD-002", "Food service charcuterie pack",
+                    "Bundle support for hotels and restaurants with recurring weekly demand.",
                     "Tiered price", "client_specific", "active", "Available for approved B2B buyers.",
                     List.of("PROD-0004", "PROD-0005")));
-                promotions.save(new Promotion("PROMO-COLD-003", "Frozen seafood planning", 
-                    "Planning reminder for frozen inventory reservations before weekend dispatch.", 
+                promotions.save(new Promotion("PROMO-COLD-003", "Frozen seafood planning",
+                    "Planning reminder for frozen inventory reservations before weekend dispatch.",
                     "Route priority", "internal", "scheduled", "Operations capacity review required.",
                     List.of("PROD-0042")));
             }
