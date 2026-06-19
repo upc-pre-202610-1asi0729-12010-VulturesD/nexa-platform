@@ -18,7 +18,7 @@ services:
       - key: JPA_DDL_AUTO
         value: update
       - key: FRONTEND_ORIGIN
-        value: https://nexa-open-source-webapp.onrender.com
+        value: https://nexa-webapp-fv2v.onrender.com
 
 databases:
   - name: nexa-open-source-platform-db
