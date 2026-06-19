@@ -27,5 +27,5 @@ Use:
 ```text
 SPRING_PROFILES_ACTIVE=postgres,seed
 DATABASE_URL=<managed PostgreSQL connection string>
-FRONTEND_ORIGIN=https://nexa-webapp.onrender.com
+FRONTEND_ORIGIN=https://nexa-open-source-webapp.onrender.com
 ```

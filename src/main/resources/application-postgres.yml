@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:nexa_platform_db}}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:nexa_open_source_platform_db}}
     username: ${SPRING_DATASOURCE_USERNAME:${DB_USERNAME:nexa_user}}
     password: ${SPRING_DATASOURCE_PASSWORD:${DB_PASSWORD:change-me}}
     driver-class-name: org.postgresql.Driver
