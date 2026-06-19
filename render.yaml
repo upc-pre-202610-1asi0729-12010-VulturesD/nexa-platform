@@ -1,7 +1,7 @@
 services:
   - type: web
     runtime: docker
-    name: nexa-platform
+    name: nexa-open-source-platform
     plan: free
     healthCheckPath: /actuator/health
     envVars:
@@ -9,7 +9,7 @@ services:
         value: postgres,seed
       - key: DATABASE_URL
         fromDatabase:
-          name: nexa-platform-db
+          name: nexa-open-source-platform-db
           property: connectionString
       - key: JWT_SECRET
         generateValue: true
@@ -18,11 +18,11 @@ services:
       - key: JPA_DDL_AUTO
         value: update
       - key: FRONTEND_ORIGIN
-        value: https://nexa-webapp.onrender.com
+        value: https://nexa-open-source-webapp.onrender.com
 
 databases:
-  - name: nexa-platform-db
+  - name: nexa-open-source-platform-db
     plan: free
-    databaseName: nexa_platform_db
-    user: nexa_platform_user
+    databaseName: nexa_open_source_platform_db
+    user: nexa_open_source_platform_user
     postgresMajorVersion: "16"
