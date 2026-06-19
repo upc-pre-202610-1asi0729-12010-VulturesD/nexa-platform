@@ -1,40 +1,37 @@
-# macOS
+HELP.md
+target/
 .DS_Store
-.AppleDouble
-.LSOverride
 __MACOSX/
-
-# .NET build output
-bin/
-obj/
-TestResults/
-out/
-packages/
-
-# IDE and local workspace files
-.vs/
-.vscode/
-.idea/
-*.user
-*.suo
-*.DotSettings.user
-/_ReSharper.Caches/
-
-# Logs and temporary files
-logs/
 *.log
-*.tmp
-*.cache
-
-# Local secrets and databases
 .env
-.env.local
-appsettings.Local.json
-*.db
-*.sqlite
-*.pfx
-*.p12
-secrets/
+.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
 
-# History folders
-/nexa-platform history/
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/

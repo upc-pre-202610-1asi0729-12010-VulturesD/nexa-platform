@@ -1,55 +1,49 @@
 # Contributing to Nexa Platform
 
-Thank you for your interest in contributing to Nexa Platform! This document outlines the standards, guidelines, and workflows for contributing to our C#/.NET Clean Architecture and Domain-Driven Design (DDD) codebase.
+This repository contains the Java Spring Boot REST API for Nexa.
 
-## Code of Conduct
+## Architecture Rules
 
-By participating in this project, you agree to abide by our [Code of Conduct](CODE_OF_CONDUCT.md) at all times.
+- Preserve bounded contexts: IAM, Catalog, Sales, Warehouse, Logistics, Invoicing, Promotions, Shared.
+- Keep domain models free of Spring MVC, HTTP, persistence annotations beyond existing JPA entities, and presentation concerns.
+- Keep controllers thin; use resources/DTOs and assemblers where the context already follows that pattern.
+- Keep external communication and Spring Data JPA adapters in infrastructure.
+- Do not expose credentials or commit `.env` files.
+- Do not change public `/api/v1` endpoint names without a clear migration reason.
 
-## Architectural Guidelines
+## Local Validation
 
-The Nexa Platform backend is built using a **Modular Monolith** pattern following **Clean Architecture** and **DDD** principles. When adding or modifying code, please respect the boundaries of each Bounded Context:
+Before opening a pull request:
 
-1. **Domain Layer:**
-   - Aggregates must not be anemic. Encapsulate business logic and validate domain invariants within aggregate methods using private/protected setters.
-   - Separate audit fields (`CreatedAt`, `UpdatedAt`) using partial classes implementing `IAuditableEntity` (e.g. `OrderAudit.cs` for the `Order` aggregate).
-   - Implement Value Objects as immutable `record` types and perform internal validation in their constructors, throwing `ArgumentException` for invalid states.
-   
-2. **Application Layer:**
-   - Orchestrate use cases using Command and Query Services.
-   - Use the `Result` pattern to return success or error states instead of throwing business exceptions for control flow.
+```bash
+./mvnw test
+./mvnw package
+```
 
-3. **Infrastructure Layer:**
-   - Confine all database/EF Core mapping, queries, and migrations details to this layer.
-   - Follow pluralized `snake_case` naming conventions for tables and columns in PostgreSQL.
+For local API verification:
 
-4. **Interfaces Layer:**
-   - Keep REST API controllers thin. Use resources/DTOs for contracts, and translate them to Domain models using Assemblers.
-   - Return RFC 7807 `ProblemDetails` format for error responses.
+```bash
+SPRING_PROFILES_ACTIVE=local ./mvnw spring-boot:run
+```
 
-## Development Workflow
+Swagger UI:
 
-### Setup Local Environment
-For instructions on setting up your local PostgreSQL database, environment variables, and running the application, see [Environment Setup](docs/database-setup.md).
+```text
+http://localhost:8080/swagger-ui/index.html
+```
 
-### Branch Naming Conventions
-Always create a new branch from `develop` using one of the following prefixes:
-- `feature/` for new functionality (e.g. `feature/low-stock-alert`)
-- `fix/` for bug fixes (e.g. `fix/jwt-expiration-check`)
-- `docs/` for documentation updates (e.g. `docs/api-routes`)
-- `refactor/` for code restructuring (e.g. `refactor/order-aggregate`)
+## Branches And Commits
 
-### Commits Convention
-We follow Conventional Commits format:
-- `feat(sales): add order cancellation endpoint`
-- `fix(iam): resolve password hashing salt issues`
-- `docs(wiki): update local deployment steps`
+- Use GitFlow-style branches: `feature/*`, `fix/*`, `docs/*`, `refactor/*`, `chore/*`.
+- Use Conventional Commits when possible:
+  - `feat(catalog): add product query endpoint`
+  - `fix(iam): correct JWT validation`
+  - `docs(deploy): update Render environment variables`
 
-## Pull Request Process
+## Pull Request Checklist
 
-1. Ensure your code compiles cleanly using `dotnet build` with zero errors.
-2. Run database migrations locally and check database counts.
-3. Exclude any local credentials (`appsettings.Local.json`, `.env`) from version control.
-4. Open a pull request against the `develop` branch.
-5. Provide a summary of the changes and local testing results (e.g. Swagger queries).
-6. Request a review from at least one backend team member.
+- [ ] Tests pass with `./mvnw test`.
+- [ ] Package succeeds with `./mvnw package`.
+- [ ] No generated files such as `target/` are committed.
+- [ ] No secrets or credentials are committed.
+- [ ] README/docs are updated when behavior, deployment, or API contracts change.

@@ -1,18 +1,10 @@
-# Build stage
-FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
-WORKDIR /src
-
-# Copy csproj and restore dependencies
-COPY ["King.Nexa.Platform/King.Nexa.Platform.csproj", "King.Nexa.Platform/"]
-RUN dotnet restore "King.Nexa.Platform/King.Nexa.Platform.csproj"
-
-# Copy everything else and build the app
+FROM maven:3.9-eclipse-temurin-21 AS build
+WORKDIR /workspace
 COPY . .
-WORKDIR "/src/King.Nexa.Platform"
-RUN dotnet publish "King.Nexa.Platform.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN ./mvnw -DskipTests package
 
-# Runtime stage
-FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS final
+FROM eclipse-temurin:21-jre
 WORKDIR /app
-COPY --from=build /app/publish .
-ENTRYPOINT ["dotnet", "King.Nexa.Platform.dll"]
+COPY --from=build /workspace/target/*.jar app.jar
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "/app/app.jar"]
