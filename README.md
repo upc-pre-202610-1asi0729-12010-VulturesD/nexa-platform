@@ -24,7 +24,7 @@
 ![Cycle](https://img.shields.io/badge/Cycle-2026--10-0a2540?style=flat-square)
 ![University](https://img.shields.io/badge/University-UPC-0a2540?style=flat-square)
 ![Team](https://img.shields.io/badge/Team-Nexa-2a67d9?style=flat-square)
-![Status](https://img.shields.io/badge/Status-Release%201.0.0-22c55e?style=flat-square)
+![Status](https://img.shields.io/badge/Status-Release%201.0.1-22c55e?style=flat-square)
 
 <br/>
 
@@ -61,11 +61,11 @@ The API is implemented with Java 21 and Spring Boot. It exposes RESTful endpoint
     <td width="50%">
       <p><a href="https://github.com/upc-pre-202610-1asi0729-12010-VulturesD/nexa-webapp">upc-pre-202610-1asi0729-12010-VulturesD/nexa-webapp</a></p>
       <p>Angular Web Application for operational workflows and buyer-facing coordination.</p>
-      <p><a href="https://nexa-webapp-fv2v.onrender.com/#/auth/login">Open Live WebApp Login</a></p>
+      <p><a href="https://nexa-webapp-fv2v.onrender.com/login">Open Live WebApp Login</a></p>
       <p>
         <img alt="Angular" src="https://img.shields.io/badge/Angular-21-DD0031?style=flat-square&logo=angular&logoColor=white" />
         <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5.9-3178C6?style=flat-square&logo=typescript&logoColor=white" />
-        <img alt="Angular Material" src="https://img.shields.io/badge/Angular%20Material-18-0a2540?style=flat-square" />
+        <img alt="Angular Material" src="https://img.shields.io/badge/Angular%20Material-21-0a2540?style=flat-square" />
       </p>
     </td>
   </tr>
