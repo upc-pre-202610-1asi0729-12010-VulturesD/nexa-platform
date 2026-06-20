@@ -1,0 +1,28 @@
+services:
+  - type: web
+    runtime: docker
+    name: nexa-open-source-platform
+    plan: free
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: postgres,seed
+      - key: DATABASE_URL
+        fromDatabase:
+          name: nexa-open-source-platform-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRATION_MINUTES
+        value: "120"
+      - key: JPA_DDL_AUTO
+        value: update
+      - key: FRONTEND_ORIGIN
+        value: https://nexa-webapp-fv2v.onrender.com
+
+databases:
+  - name: nexa-open-source-platform-db
+    plan: free
+    databaseName: nexa_open_source_platform_db
+    user: nexa_open_source_platform_user
+    postgresMajorVersion: "16"
