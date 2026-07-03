@@ -1,0 +1,9 @@
+package com.nexa.platform.invoicing.application.dtos;
+
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import java.util.List;
+
+public record UpdateInvoiceRequest(String invoiceNumber, @NotNull Long orderId, String currency,
+                                   @NotEmpty List<@Valid InvoiceLineRequest> lines) { }
